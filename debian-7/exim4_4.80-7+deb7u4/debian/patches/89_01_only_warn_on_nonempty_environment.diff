@@ -1,0 +1,38 @@
+Description: Don't issue env warning if env is empty
+ keep_environment needs to be mentioned in the runtime config.
+ Setting add_environment isn't enough to suppress the warning.
+
+ (cherry picked from commit 8e58ed807c77febfde61d3cf47928302f93cc99c)
+Origin: upstream
+
+--- exim4-4.80.orig/src/readconf.c
++++ exim4-4.80/src/readconf.c
+@@ -3350,10 +3350,10 @@ if (openssl_options != NULL)
+   }
+ #endif
+ 
+-if ((!add_environment || *add_environment == '\0') && !keep_environment)
++if (!keep_environment && environ && *environ)
+   log_write(0, LOG_MAIN,
+-      "WARNING: purging the environment.\n"
+-      " Suggested action: use keep_environment and add_environment.\n");
++      "Warning: purging the environment.\n"
++      " Suggested action: use keep_environment.");
+ }
+ 
+ 
+--- exim4-4.80.orig/doc/spec.txt
++++ exim4-4.80/doc/spec.txt
+@@ -13007,8 +13007,10 @@ having FOO_HOME in your keep_environment
+ You may work around this using a regular expression that does not match the
+ macro name: ^[F]OO_HOME$.
+ 
+-Current versions of Exim issue a warning during startupif you do not mention 
+-keep_environment or add_environment in your runtime configuration file.
++Current versions of Exim issue a warning during startup if you do not mention
++keep_environment in your runtime configuration file and if there is
++anything in your environment. Future versions may not issue that warning
++anymore.
+ 
+ +--------------+---------+----------+-----------+
+ |keep_malformed|Use: main|Type: time|Default: 4d|

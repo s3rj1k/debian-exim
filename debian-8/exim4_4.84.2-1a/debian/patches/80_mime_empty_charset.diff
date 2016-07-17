@@ -1,0 +1,60 @@
+From 93cad488cb2c9a31aea345c8910a9f9c5815071c Mon Sep 17 00:00:00 2001
+From: Jeremy Harris <jgh146exb@wizmail.org>
+Date: Fri, 29 Aug 2014 14:11:50 +0100
+Subject: [PATCH] Fix crash in mime acl when a parameter is zero-length
+
+
+diff --git a/src/mime.c b/src/mime.c
+index 95d3da4..ab701f2 100644
+--- a/src/mime.c
++++ b/src/mime.c
+@@ -620,12 +620,18 @@ NEXT_PARAM_SEARCH:
+ 		else
+ 		  param_value = string_cat(param_value, &size, &ptr, q++, 1);
+ 		}
+-	      param_value[ptr++] = '\0';
+-	      param_value_len = ptr;
+-
+-	      param_value = rfc2047_decode(param_value, check_rfc2047_length, NULL, 32, &param_value_len, &q);
+-	      debug_printf("Found %s MIME parameter in %s header, value is '%s'\n", mp->name, mime_header_list[i].name, param_value);
+-	      *((uschar **)(mp->value)) = param_value;
++	      if (param_value)
++		{
++		param_value[ptr++] = '\0';
++		param_value_len = ptr;
++
++		param_value = rfc2047_decode(param_value,
++		      check_rfc2047_length, NULL, 32, &param_value_len, &q);
++		debug_printf("Found %s MIME parameter in %s header, "
++		      "value is '%s'\n", mp->name, mime_header_list[i].name,
++		      param_value);
++		}
++	      *mp->value = param_value;
+ 	      p += (mp->namelen + param_value_len + 1);
+ 	      goto NEXT_PARAM_SEARCH;
+ 	    }
+diff --git a/src/mime.h b/src/mime.h
+index abf68da..af09f67 100644
+--- a/src/mime.h
++++ b/src/mime.h
+@@ -40,15 +40,15 @@ static int mime_header_list_size = sizeof(mime_header_list)/sizeof(mime_header);
+ 
+ 
+ typedef struct mime_parameter {
+-  uschar *name;
+-  int    namelen;
+-  void   *value;
++  uschar *  name;
++  int       namelen;
++  uschar ** value;
+ } mime_parameter;
+ 
+ static mime_parameter mime_parameter_list[] = {
+-  { US"name=", 5, &mime_filename },
++  { US"name=",     5, &mime_filename },
+   { US"filename=", 9, &mime_filename },
+-  { US"charset=", 8, &mime_charset },
++  { US"charset=",  8, &mime_charset },
+   { US"boundary=", 9, &mime_boundary }
+ };
+ 

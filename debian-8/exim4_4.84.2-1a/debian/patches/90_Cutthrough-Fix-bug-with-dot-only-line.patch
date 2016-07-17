@@ -1,0 +1,32 @@
+From 2d51a06458d4fb771dca34966cf2d19c6820ce61 Mon Sep 17 00:00:00 2001
+From: Jeremy Harris <jgh146exb@wizmail.org>
+Date: Thu, 21 Jan 2016 15:37:08 +0000
+Subject: [PATCH] Cutthrough: Fix bug with dot-only line
+ JH/38 Fix cutthrough bug with body lines having a single dot. The dot was
+      incorrectly not doubled on cutthrough transmission, hence seen as a
+      body-termination at the receiving system - resulting in truncated mails.
+      Commonly the sender saw a TCP-level error, and retransmitted the nessage
+      via the normal store-and-forward channel. This could result in duplicates
+      received - but deduplicating mailstores were liable to retain only the
+      initial truncated version.
+ (cherry picked from commit 1bc460a64a0de0766d21f4f8660c6597bc410cbc)
+
+--- exim4-4.84.2.orig/src/receive.c
++++ exim4-4.84.2/src/receive.c
+@@ -838,7 +838,15 @@ while ((ch = (receive_getc)()) != EOF)
+       ch_state = 4;
+       continue;
+       }
+-    ch_state = 1;                       /* The dot itself is removed */
++    /* The dot was removed at state 3. For a doubled dot, here, reinstate
++    it to cutthrough. The current ch, dot or not, is passed both to cutthrough
++    and to file below. */
++    if (ch == '.')
++      {
++      uschar c= ch;
++      (void) cutthrough_puts(&c, 1);
++      }
++    ch_state = 1;
+     break;
+ 
+     case 4:                             /* After [CR] LF . CR */

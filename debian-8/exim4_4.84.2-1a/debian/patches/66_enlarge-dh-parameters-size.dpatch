@@ -1,0 +1,20 @@
+Description: Enlarge default server side size of DH parameters to 2048
+ from 1024. This patch has no effect if building against gnutls >= 2.12,
+ because exim is using gnutls_sec_param_to_pk_bits() to get correct number
+ of dh_bits when built against newer gnutls-versions.
+Author: Marc Haber <mh+debian-packages@zugschlus.de>
+Origin: vendor
+Forwarded: no
+Last-Update: 2013-09-28
+
+--- exim4-4.82~rc1.orig/src/tls-gnu.c
++++ exim4-4.82~rc1/src/tls-gnu.c
+@@ -164,7 +164,7 @@ callbacks. */
+ can ask for a bit-strength.  Without that, we stick to the constant we had
+ before, for now. */
+ #ifndef EXIM_SERVER_DH_BITS_PRE2_12
+-#define EXIM_SERVER_DH_BITS_PRE2_12 1024
++#define EXIM_SERVER_DH_BITS_PRE2_12 2048
+ #endif
+ 
+ #define exim_gnutls_err_check(Label) do { \

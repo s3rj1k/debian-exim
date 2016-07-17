@@ -1,0 +1,80 @@
+Backport of 3de973a29de6852d61ba9bf1845835d08ca5a5ab
+
+From: "Heiko Schlittermann (HS12-RIPE)" <hs@schlittermann.de>
+Date: Wed, 2 Mar 2016 22:07:45 +0100
+Subject: [PATCH] Delay chdir(/) until we opened the main config
+
+--- exim4-4.80.orig/src/exim.c
++++ exim4-4.80/src/exim.c
+@@ -3491,14 +3491,11 @@ init_lookup_list();
+ 
+ /* Read the main runtime configuration data; this gives up if there
+ is a failure. It leaves the configuration file open so that the subsequent
+-configuration data for delivery can be read if needed. */
++configuration data for delivery can be read if needed.
+ 
+-/* To be safe: change the working directory to /. */
+-if (Uchdir("/") < 0)
+-  {
+-    perror("exim: chdir `/': ");
+-    exit(EXIT_FAILURE);
+-  }
++NOTE: immediatly after opening the configuration file we change the working
++directory to "/"! Later we change to $spool_directory. We do it there, because
++during readconf_main() some expansion takes place already. */
+ 
+ /* Store the initial cwd before we change directories */
+ if ((initial_cwd = getcwd(NULL, 0)) == NULL)
+@@ -3509,6 +3506,8 @@ if ((initial_cwd = getcwd(NULL, 0)) == N
+ 
+ readconf_main();
+ 
++/* Now in directory "/" */
++
+ if (cleanup_environment() == FALSE)
+   log_write(0, LOG_PANIC_DIE, "Can't cleanup environment");
+ 
+--- exim4-4.80.orig/src/readconf.c
++++ exim4-4.80/src/readconf.c
+@@ -2906,14 +2906,6 @@ while((filename = string_nextinlist(&lis
+        != NULL)
+   {
+ 
+-  /* To avoid confusion: Exim changes to / at the very beginning and
+-   * and to $spool_directory later. */
+-  if (filename[0] != '/')
+-    {
+-    fprintf(stderr, "-C %s: only absolute names are allowed\n", filename);
+-    exit(EXIT_FAILURE);
+-  }
+-
+   /* Cut out all the fancy processing unless specifically wanted */
+ 
+   #if defined(CONFIGURE_FILE_USE_NODE) || defined(CONFIGURE_FILE_USE_EUID)
+@@ -2967,6 +2959,15 @@ while((filename = string_nextinlist(&lis
+   if (config_file != NULL || errno != ENOENT) break;
+   }
+ 
++/* Now, once we found and opened our configuration file, we change the directory
++to a safe place. Later we change to $spool_directory. */
++
++if (Uchdir("/") < 0)
++  {
++  perror("exim: chdir `/': ");
++  exit(EXIT_FAILURE);
++  }
++
+ /* On success, save the name for verification; config_filename is used when
+ logging configuration errors (it changes for .included files) whereas
+ config_main_filename is the name shown by -bP. Failure to open a configuration
+--- exim4-4.80.orig/doc/spec.txt
++++ exim4-4.80/doc/spec.txt
+@@ -3305,8 +3305,6 @@ brief message about itself and exits.
+     first file that exists is used. Failure to open an existing file stops Exim
+     from proceeding any further along the list, and an error is generated.
+ 
+-    The file names need to be absolute names.
+-
+     When this option is used by a caller other than root, and the list is
+     different from the compiled-in list, Exim gives up its root privilege
+     immediately, and runs with the real and effective uid and gid set to those

@@ -1,0 +1,79 @@
+Description: Store the initial working directory, expand $initial_cwd.
+ Bug 1805 https://bugs.exim.org/show_bug.cgi?id=1805
+Origin: upstream
+
+--- a/src/globals.c
++++ b/src/globals.c
+@@ -759,6 +759,7 @@ BOOL    ignore_fromline_local  = FALSE;
+ uschar *ignore_fromline_hosts  = NULL;
+ BOOL    inetd_wait_mode        = FALSE;
+ int     inetd_wait_timeout     = -1;
++uschar *initial_cwd            = NULL;
+ uschar *interface_address      = NULL;
+ int     interface_port         = -1;
+ BOOL    is_inetd               = FALSE;
+--- a/src/exim.c
++++ b/src/exim.c
+@@ -3689,6 +3689,13 @@ NOTE: immediatly after opening the confi
+ directory to "/"! Later we change to $spool_directory. We do it there, because
+ during readconf_main() some expansion takes place already. */
+ 
++/* Store the initial cwd before we change directories */
++if ((initial_cwd = getcwd(NULL, 0)) == NULL)
++  {
++  perror("exim: can't get the current working directory");
++  exit(EXIT_FAILURE);
++  }
++
+ readconf_main();
+ 
+ /* Now in directory "/" */
+@@ -3967,9 +3974,10 @@ if (((debug_selector & D_any) != 0 || (l
+   {
+   int i;
+   uschar *p = big_buffer;
+-  char * dummy;
+   Ustrcpy(p, "cwd= (failed)");
+-  dummy = /* quieten compiler */ getcwd(CS p+4, big_buffer_size - 4);
++
++  Ustrncpy(p + 4, initial_cwd, big_buffer_size-5);
++
+   while (*p) p++;
+   (void)string_format(p, big_buffer_size - (p - big_buffer), " %d args:", argc);
+   while (*p) p++;
+--- a/src/globals.h
++++ b/src/globals.h
+@@ -486,6 +486,7 @@ extern BOOL    ignore_fromline_local;  /
+ extern uschar *ignore_fromline_hosts;  /* Hosts permitted to send "From " */
+ extern BOOL    inetd_wait_mode;        /* Whether running in inetd wait mode */
+ extern int     inetd_wait_timeout;     /* Timeout for inetd wait mode */
++extern uschar *initial_cwd;            /* The directory we where in at startup */
+ extern BOOL    is_inetd;               /* True for inetd calls */
+ extern uschar *iterate_item;           /* Item from iterate list */
+ 
+--- a/src/expand.c
++++ b/src/expand.c
+@@ -501,6 +501,7 @@ static var_entry var_table[] = {
+   { "host_data",           vtype_stringptr,   &host_data },
+   { "host_lookup_deferred",vtype_int,         &host_lookup_deferred },
+   { "host_lookup_failed",  vtype_int,         &host_lookup_failed },
++  { "initial_cwd",         vtype_stringptr,   &initial_cwd },
+   { "inode",               vtype_ino,         &deliver_inode },
+   { "interface_address",   vtype_stringptr,   &interface_address },
+   { "interface_port",      vtype_int,         &interface_port },
+--- a/doc/spec.txt
++++ b/doc/spec.txt
+@@ -10426,6 +10426,13 @@ $host_lookup_failed
+ 
+     See $host_lookup_deferred.
+ 
++$initial_cwd
++
++    This variable contains the full path name of the initial working
++    directory of the current Exim process. This may differ from the current
++    working directory, as Exim changes this to "/" during early startup, and
++    to $spool_directory later.
++
+ $inode
+ 
+     The only time this variable is set is while expanding the directory_file
