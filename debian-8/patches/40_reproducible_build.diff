@@ -1,0 +1,63 @@
+Description: Reproducible build fix.
+ Use REPBUILDDATE which is pulled from debian/changelog in debian/rules
+ instead of __DATE__ as compile date.
+Author: Andreas Metzler <ametzler@debian.org>
+
+--- a/exim_monitor/em_version.c
++++ b/exim_monitor/em_version.c
+@@ -10,6 +10,8 @@
+ #include <string.h>
+ #include <stdlib.h>
+ 
++#include "../src/repbuildtime.h"
++
+ extern uschar *version_string;
+ extern uschar *version_date;
+ 
+@@ -21,7 +23,7 @@ uschar today[20];
+ 
+ version_string = US"2.06";
+ 
+-Ustrcpy(today, __DATE__);
++Ustrcpy(today, REPBUILDDATE);
+ if (today[4] == ' ') i = 1;
+ today[3] = today[6] = '-';
+ 
+@@ -31,7 +33,7 @@ Ustrncat(version_date, today+4+i, 3-i);
+ Ustrncat(version_date, today, 4);
+ Ustrncat(version_date, today+7, 4);
+ Ustrcat(version_date, " ");
+-Ustrcat(version_date, __TIME__);
++Ustrcat(version_date, REPBUILDTIME);
+ }
+ 
+ /* End of em_version.c */
+--- a/src/version.c
++++ b/src/version.c
+@@ -11,6 +11,8 @@
+ 
+ #include "version.h"
+ 
++#include "../src/repbuildtime.h"
++
+ 
+ /* The header file cnumber.h contains a single line containing the
+ compilation number, making it easy to have it updated automatically.
+@@ -40,7 +42,7 @@ version_cnumber_format = US"%d\0<<eximcn
+ sprintf(CS version_cnumber, CS version_cnumber_format, cnumber);
+ version_string = US EXIM_VERSION_STR "\0<<eximversion>>";
+ 
+-Ustrcpy(today, __DATE__);
++Ustrcpy(today, REPBUILDDATE);
+ if (today[4] == ' ') today[4] = '0';
+ today[3] = today[6] = '-';
+ 
+@@ -50,7 +52,7 @@ Ustrncat(version_date, today+4, 3);
+ Ustrncat(version_date, today, 4);
+ Ustrncat(version_date, today+7, 4);
+ Ustrcat(version_date, " ");
+-Ustrcat(version_date, __TIME__);
++Ustrcat(version_date, REPBUILDTIME);
+ }
+ 
+ /* End of version.c */

@@ -1,0 +1,2 @@
+exim4-daemon-light: setuid-binary usr/sbin/exim4 4755 root/root
+exim4-daemon-light: possible-gpl-code-linked-with-openssl

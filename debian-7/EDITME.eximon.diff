@@ -1,0 +1,10 @@
+--- org	2016-12-18 14:02:28.000000000 +0000
++++ EDITME	2017-02-10 11:57:08.594176601 +0000
+@@ -1,6 +1,7 @@
+ ##################################################
+ #          The Exim mail transport agent         #
+ ##################################################
++# -*- makefile -*-
+ 
+ # This is the template for Exim's main build-time configuration file. It
+ # contains settings that are independent of any operating system. These are

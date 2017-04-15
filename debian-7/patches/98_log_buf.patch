@@ -1,0 +1,11 @@
+--- exim-4.87.orig/src/config.h.defaults
++++ exim-4.87/src/config.h.defaults
+@@ -131,7 +131,7 @@
+ #define SPOOL_DIRECTORY
+ #define SPOOL_DIRECTORY_MODE       0750
+ #define SPOOL_MODE                 0640
+-#define STRING_SPRINTF_BUFFER_SIZE (8192 * 4)
++#define STRING_SPRINTF_BUFFER_SIZE (8192 * 64)
+ 
+ #define SUPPORT_CRYPTEQ
+ #define SUPPORT_I18N

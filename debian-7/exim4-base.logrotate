@@ -1,0 +1,21 @@
+/var/log/exim4/mainlog /var/log/exim4/rejectlog {
+	daily
+	missingok
+	rotate 10
+	compress
+	delaycompress
+	notifempty
+	create 640 exim adm
+}
+
+# /var/log/exim4/main.log /var/log/exim4/reject.log /var/log/exim4/panic.log {
+#     su exim exim
+#     create 666 exim exim
+#     daily
+#     missingok
+#     rotate 720
+#     dateext
+#     compress
+#     delaycompress
+#     notifempty
+# }

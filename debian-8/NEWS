@@ -1,0 +1,5 @@
+exim4 (4.89-1a) jessie; urgency=medium
+
+  * https://github.com/Exim/exim/blob/master/doc/doc-txt/ChangeLog
+
+ -- s3rj1k <evasive.gyron@gmail.com>  Wed, 08 Mar 2017 18:37:18 +0100

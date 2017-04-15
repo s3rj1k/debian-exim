@@ -1,0 +1,13 @@
+#!/bin/sh
+#--------------
+# Testing exim4
+#--------------
+set -e
+DAEMON=exim4
+
+if pidof -x $DAEMON > /dev/null; then
+    echo "OK"
+else
+    echo "ERROR: ${DAEMON} IS NOT RUNNING"
+    exit 1
+fi

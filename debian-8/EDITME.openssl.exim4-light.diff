@@ -1,0 +1,19 @@
+--- EDITME.orig	2017-02-13 14:48:06.541995281 +0000
++++ EDITME	2017-02-13 14:48:13.238040517 +0000
+@@ -753,13 +753,13 @@
+ 
+ # Uncomment one of these settings if you are using OpenSSL; pkg-config vs not
+ # USE_OPENSSL_PC=openssl
+-# TLS_LIBS=-lssl -lcrypto
++TLS_LIBS=-lssl -lcrypto
+ 
+ # Uncomment the first and either the second or the third of these if you
+ # are using GnuTLS.  If you have pkg-config, then the second, else the third.
+-USE_GNUTLS=yes
++# USE_GNUTLS=yes
+ # USE_GNUTLS_PC=gnutls
+-TLS_LIBS=-lgnutls
++# TLS_LIBS=-lgnutls
+ 
+ # If using GnuTLS older than 2.10 and using pkg-config then note that Exim's
+ # build process will require libgcrypt-config to exist in your $PATH.  A

@@ -1,0 +1,11 @@
+31_eximmanpage.dpatch
+32_exim4.dpatch
+33_eximon.binary.dpatch
+34_eximstatsmanpage.dpatch
+35_install.dpatch
+50_localscan_dlopen.dpatch
+60_convert4r4.dpatch
+67_unnecessaryCopt.diff
+70_remove_exim-users_references.dpatch
+78_Disable-chunking-BDAT-by-default.patch
+98_log_buf.patch
