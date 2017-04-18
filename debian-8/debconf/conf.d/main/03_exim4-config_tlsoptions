@@ -15,7 +15,7 @@ tls_advertise_hosts = MAIN_TLS_ADVERTISE_HOSTS
 
 
 # Full paths to Certificate and Private Key. The Private Key file
-# must be kept 'secret' and should be owned by root.exim mode
+# must be kept 'secret' and should be owned by root.Debian-exim mode
 # 640 (-rw-r-----). exim-gencert takes care of these prerequisites.
 # Normally, exim4 looks for certificate and key in different files:
 #   MAIN_TLS_CERTIFICATE - path to certificate file,

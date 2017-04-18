@@ -23,7 +23,7 @@ case "$1" in
 		/etc/exim4 /var/lib/exim4 2> /dev/null || true
 	rm -f /etc/default/exim4
 	# remove user
-	#deluser  --quiet exim > /dev/null || true
+	#deluser  --quiet Debian-exim > /dev/null || true
 	;;
 esac
 

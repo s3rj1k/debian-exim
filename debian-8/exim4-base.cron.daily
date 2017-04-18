@@ -85,14 +85,14 @@ if [ "$E4BCD_WATCH_PANICLOG" != "no" ]; then
   fi
 fi
 
-# run tidydb as exim:exim.
+# run tidydb as Debian-exim:Debian-exim.
 if [ -x /usr/sbin/exim_tidydb ]; then
   cd $SPOOLDIR/db || exit 1
   if ! find $SPOOLDIR/db -maxdepth 1 -name '*.lockfile' -or -name 'log.*' \
     -or -type f -printf '%f\0' | \
       xargs -0r -n 1 \
       start-stop-daemon --start --exec /usr/sbin/exim_tidydb \
-      --chuid exim:exim -- $SPOOLDIR > /dev/null; then
+      --chuid Debian-exim:Debian-exim -- $SPOOLDIR > /dev/null; then
     # if we reach this, invoking exim_tidydb from start-stop-daemon has
     # failed, most probably because of libpam-tmpdir being in use
     # (see #373786 and #376165)
@@ -100,6 +100,6 @@ if [ -x /usr/sbin/exim_tidydb ]; then
     -or -type f -printf '%f\0' | \
     su - --shell /bin/bash \
          --command "xargs -0r -n 1 /usr/sbin/exim_tidydb $SPOOLDIR > /dev/null" \
-         exim
+         Debian-exim
   fi
 fi

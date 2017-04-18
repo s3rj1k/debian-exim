@@ -82,7 +82,7 @@ log()
 start_exim()
 {
   [ -e /var/run/exim4 ] || \
-    install -d -oexim -gexim -m750 /var/run/exim4
+    install -d -oDebian-exim -gDebian-exim -m750 /var/run/exim4
   case ${QUEUERUNNER} in
     combined)
       start_daemon -p "$PIDFILE" \

@@ -1254,9 +1254,9 @@
 	</para>
 	<para>
 	  <filename>/etc/exim4/passwd.client</filename> needs to be
-	  readable for the exim user (user exim, group
-	  exim). It is suggested that you keep the default
-	  permissions root:exim 0640.
+	  readable for the exim user (user Debian-exim, group
+	  Debian-exim). It is suggested that you keep the default
+	  permissions root:Debian-exim 0640.
 	</para>
       </section>
       <section>	<title>Using Exim as SMTP-AUTH server</title>
@@ -1277,7 +1277,7 @@
 	  If you want to authenticate against system passwords (e.g.
 	  <filename>/etc/shadow</filename>) the easiest way is to use
 	  saslauthd in the Debian package sasl2-bin. You have to add the
-	  exim-user (currently exim) to the sasl group, to give
+	  exim-user (currently Debian-exim) to the sasl group, to give
 	  exim permission to use the saslauthd service.
 	</para>
 	<para>
@@ -1454,8 +1454,8 @@ service smtp
     socket_type = stream
     protocol    = tcp
     wait        = no
-    user        = exim
-    group       = exim
+    user        = Debian-exim
+    group       = Debian-exim
     server      = /usr/sbin/exim4
     server_args = exim4 -bs
 }
@@ -1470,7 +1470,7 @@ service smtp
       </para>
       <para>If you want to use plain inetd, insert following line into
 	<filename>/etc/inetd.conf</filename>:<programlisting>
-smtp stream   tcp     nowait  exim     /usr/sbin/exim4 exim4 -bs
+smtp stream   tcp     nowait  Debian-exim     /usr/sbin/exim4 exim4 -bs
 	</programlisting>
       </para>
     </section>
@@ -1534,7 +1534,7 @@ smtp stream   tcp     nowait  exim     /usr/sbin/exim4 exim4 -bs
 	<filename>/etc/aliases</filename> file is disabled by default
 	in the Debian Exim 4 packages. The delivery process including the
 	program being piped to would run as the exim admin-user
-	exim, which might open up security holes.
+	Debian-exim, which might open up security holes.
       </para>
       <para>
 	Invoking pipes from <filename>/etc/aliases</filename> file is

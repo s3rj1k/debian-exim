@@ -64,7 +64,7 @@ acl_check_data:
   # See the exim docs and the exim wiki for more suitable examples.
   #
   # warn
-  #   spam = exim:true
+  #   spam = Debian-exim:true
   #   add_header = X-Spam_score: $spam_score\n\
   #             X-Spam_score_int: $spam_score_int\n\
   #             X-Spam_bar: $spam_bar\n\

@@ -130,7 +130,7 @@ unpack-configs-stamp: src/EDITME exim_monitor/EDITME
 ifdef OPENSSL
 	patch EDITME.exim4-light $(DEBIAN)/EDITME.openssl.exim4-light.diff
 endif
-	-for editme in $(DEBIAN)/EDITME.exim4-*.diff; do \
+	for editme in $(DEBIAN)/EDITME.exim4-*.diff; do \
 	  if [ "$$editme" != "$(DEBIAN)/EDITME.exim4-light.diff" ]; then \
 	    TARGETNAME=`basename $$editme .diff`; \
 	    echo patch -o $$TARGETNAME EDITME.exim4-light $$editme; \
@@ -246,8 +246,8 @@ endif
 test-stamp: build-arch-stamp
 	# it is not possible to run exim unless the compile-time specified
 	# user exists.
-	if id -u exim ; then \
-		echo exim user found, running minimal testsuite ; \
+	if id -u Debian-exim ; then \
+		echo Debian-exim user found, running minimal testsuite ; \
 		chmod +x debian/minimaltest ; \
 		rm -rf $(CURDIR)/test ; \
 		for i in b-exim4-daemon-light/build-$(buildname)/exim \

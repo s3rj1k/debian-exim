@@ -5,12 +5,12 @@
 	compress
 	delaycompress
 	notifempty
-	create 640 exim adm
+	create 640 Debian-exim adm
 }
 
 # /var/log/exim4/main.log /var/log/exim4/reject.log /var/log/exim4/panic.log {
-#     su exim exim
-#     create 666 exim exim
+#     su Debian-exim Debian-exim
+#     create 666 Debian-exim adm
 #     daily
 #     missingok
 #     rotate 720

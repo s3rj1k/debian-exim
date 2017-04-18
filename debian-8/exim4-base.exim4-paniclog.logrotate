@@ -5,6 +5,6 @@
 	compress
 	delaycompress
 	notifempty
-	create 640 exim adm
+	create 640 Debian-exim adm
 }
 

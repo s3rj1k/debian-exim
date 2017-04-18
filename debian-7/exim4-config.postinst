@@ -192,17 +192,17 @@ then
 fi
 
 if [ "$1" = "configure" ] &&\
-	! getent passwd exim > /dev/null ; then
+	! getent passwd Debian-exim > /dev/null ; then
 	echo 'Adding system-user for exim (v4)' 1>&2
 	adduser --system --group --quiet --home /var/spool/exim4 \
-	        --no-create-home --disabled-login --force-badname exim
+	        --no-create-home --disabled-login --force-badname Debian-exim
 fi
 
 # fix permissions of /etc/exim4/passwd.client
 if [ "$1" = "configure" ] ; then
 	if ! dpkg-statoverride --list /etc/exim4/passwd.client > /dev/null 2>&1
 	then
-		dpkg-statoverride --update --add root exim 0640 \
+		dpkg-statoverride --update --add root Debian-exim 0640 \
 			/etc/exim4/passwd.client
 	fi
 
@@ -211,14 +211,14 @@ if [ "$1" = "configure" ] ; then
 		while read i ;
 		do
 			if ! dpkg-statoverride --list "$i" > /dev/null ; then
-				chown exim "$i"
+				chown Debian-exim "$i"
 			fi
 		done
 		find /etc/exim4 -group mail \( -type f -or -type d \) -print |\
 		while read i ;
 		do
 			if ! dpkg-statoverride --list "$i" > /dev/null ; then
-				chgrp exim "$i"
+				chgrp Debian-exim "$i"
 			fi
 		done
 	fi

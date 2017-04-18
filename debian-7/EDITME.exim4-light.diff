@@ -23,7 +23,7 @@
  # owner of a local mailbox.) Specifying these values as root is not supported.
  
 -EXIM_USER=
-+EXIM_USER=ref:exim
++EXIM_USER=ref:Debian-exim
  
  # If you specify EXIM_USER as a name, this is looked up at build time, and the
  # uid number is built into the binary. However, you can specify that this
@@ -31,7 +31,7 @@
  # you want to use a group other than the default group for the given user.
  
  # EXIM_GROUP=
-+EXIM_GROUP=ref:exim
++EXIM_GROUP=ref:Debian-exim
  
  # Many sites define a user called "exim", with an appropriate default group,
  # and use

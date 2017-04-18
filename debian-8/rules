@@ -250,8 +250,8 @@ endif
 test-stamp: build-arch-stamp
 	# it is not possible to run exim unless the compile-time specified
 	# user exists.
-	if id -u exim ; then \
-		echo exim user found, running minimal testsuite ; \
+	if id -u Debian-exim ; then \
+		echo Debian-exim user found, running minimal testsuite ; \
 		chmod +x debian/minimaltest ; \
 		rm -rf $(CURDIR)/test ; \
 		for i in b-exim4-daemon-light/build-$(buildname)/exim \

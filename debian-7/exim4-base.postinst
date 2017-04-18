@@ -15,27 +15,27 @@ BDBVERSION=3.0
 case "$1" in
   configure)
 
-	if ! getent passwd exim > /dev/null ; then
+	if ! getent passwd Debian-exim > /dev/null ; then
 	  echo 'Adding system-user for exim (v4)' 1>&2
 	  adduser --system --group --quiet --home /var/spool/exim4 \
-	    --no-create-home --disabled-login --force-badname exim
+	    --no-create-home --disabled-login --force-badname Debian-exim
 	fi
 	# Create directories for log etc
 	# install also fixes permissions.
-	install -d -oexim -gadm -m2777 /var/log/exim4
-	install -d -oexim -gexim -m777 /var/run/exim4
-	install -d -oexim -gexim -m777 /var/spool/exim4
-	install -d -oexim -gexim -m777 /var/spool/exim4/db \
+	install -d -oDebian-exim -gadm -m2750 /var/log/exim4
+	install -d -oDebian-exim -gDebian-exim -m750 /var/run/exim4
+	install -d -oDebian-exim -gDebian-exim -m750 /var/spool/exim4
+	install -d -oDebian-exim -gDebian-exim -m750 /var/spool/exim4/db \
 		/var/spool/exim4/input /var/spool/exim4/msglog
 
 	# fix permissions on upgrades
 	if dpkg --compare-versions "$2" le "4.30-1" ; then
 		find /var/log/exim4 /var/spool/exim4 -group mail \
 			\( -type f -or -type d \) -print0 | \
-			xargs -0r chgrp exim
+			xargs -0r chgrp Debian-exim
 		find /var/log/exim4 /var/spool/exim4 -user mail \
 			\( -type f -or -type d \) -print0 | \
-			xargs -0r chown exim
+			xargs -0r chown Debian-exim
 	fi
 
 	# Paranoia check: On any db upgrade throw away hints
