@@ -1,3 +1,9 @@
+exim4 (4.89-2a) wheezy; urgency=medium
+
+  * CVE-2017-100369
+
+ -- s3rj1k <evasive.gyron@gmail.com>  Wed, 14 Jun 2017 07:03:07 +0200
+
 exim4 (4.89-1a) wheezy; urgency=medium
 
   * Rebuild for Debian 7.x (Wheezy) custom heavy version.

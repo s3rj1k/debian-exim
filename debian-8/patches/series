@@ -8,4 +8,5 @@
 67_unnecessaryCopt.diff
 70_remove_exim-users_references.dpatch
 78_Disable-chunking-BDAT-by-default.patch
+79_CVE-2017-1000369.patch
 98_log_buf.patch
