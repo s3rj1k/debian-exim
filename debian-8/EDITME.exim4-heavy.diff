@@ -26,7 +26,7 @@
 -# LOOKUP_MYSQL_PC=mariadb
 -LOOKUP_NIS=yes
 +LOOKUP_MYSQL=yes
-+LOOKUP_MYSQL_PC=mariadb
++# LOOKUP_MYSQL_PC=mariadb
 +# LOOKUP_NIS=yes
  # LOOKUP_NISPLUS=yes
  # LOOKUP_ORACLE=yes
@@ -36,7 +36,7 @@
 -# LOOKUP_SQLITE=yes
 -# LOOKUP_SQLITE_PC=sqlite3
 +LOOKUP_SQLITE=yes
-+LOOKUP_SQLITE_PC=sqlite3
++# LOOKUP_SQLITE_PC=sqlite3
  # LOOKUP_WHOSON=yes
  
  # These two settings are obsolete; all three lookups are compiled when
