@@ -1,6 +1,6 @@
---- EDITME.orig	2017-02-13 14:48:06.541995281 +0000
-+++ EDITME	2017-02-13 14:48:13.238040517 +0000
-@@ -753,13 +753,13 @@
+--- EDITME.orig	2017-12-01 14:18:57.053064094 +0000
++++ EDITME	2017-12-01 14:19:09.959704466 +0000
+@@ -754,13 +754,13 @@
  
  # Uncomment one of these settings if you are using OpenSSL; pkg-config vs not
  # USE_OPENSSL_PC=openssl

@@ -7,7 +7,7 @@ Last-Update: 2014-12-01
 
 --- a/README
 +++ b/README
-@@ -14,8 +14,16 @@ from Exim 3, though the basic structure
+@@ -14,8 +14,16 @@
  older book may be helpful for the background, but a lot of the detail has
  changed, so it is likely to be confusing to newcomers.
  
@@ -28,7 +28,7 @@ Last-Update: 2014-12-01
  to obtain the Exim distribution. Additional formats for the documentation
 --- a/src/eximstats.src
 +++ b/src/eximstats.src
-@@ -537,8 +537,7 @@ about how to create charts from the tabl
+@@ -537,8 +537,7 @@
  
  =head1 AUTHOR
  
