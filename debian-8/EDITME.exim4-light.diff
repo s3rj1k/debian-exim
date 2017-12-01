@@ -1,5 +1,5 @@
---- EDITME.orig	2017-02-12 21:50:18.000000000 +0000
-+++ EDITME	2017-02-13 14:43:09.791307198 +0000
+--- EDITME.orig	2017-11-28 21:40:59.000000000 +0000
++++ EDITME	2017-12-01 14:17:00.999314208 +0000
 @@ -98,7 +98,7 @@
  # /usr/local/sbin. The installation script will try to create this directory,
  # and any superior directories, if they do not exist.
@@ -64,7 +64,7 @@
  # SUPPORT_MBX=yes
  
  
-@@ -301,15 +302,15 @@
+@@ -301,16 +302,16 @@
  LOOKUP_LSEARCH=yes
  LOOKUP_DNSDB=yes
  
@@ -75,6 +75,7 @@
  # LOOKUP_IBASE=yes
  # LOOKUP_LDAP=yes
  # LOOKUP_MYSQL=yes
+ # LOOKUP_MYSQL_PC=mariadb
 -# LOOKUP_NIS=yes
 +LOOKUP_NIS=yes
  # LOOKUP_NISPLUS=yes
@@ -84,7 +85,7 @@
  # LOOKUP_PGSQL=yes
  # LOOKUP_REDIS=yes
  # LOOKUP_SQLITE=yes
-@@ -577,7 +578,7 @@
+@@ -578,7 +579,7 @@
  # CONFIGURE_OWNER setting, to specify a configuration file which is listed in
  # the TRUSTED_CONFIG_LIST file, then root privileges are not dropped by Exim.
  
@@ -93,7 +94,7 @@
  
  
  #------------------------------------------------------------------------------
-@@ -613,6 +614,9 @@
+@@ -614,6 +615,9 @@
  
  # WHITELIST_D_MACROS=TLS:SPOOL
  
@@ -103,7 +104,7 @@
  #------------------------------------------------------------------------------
  # Exim has support for the AUTH (authentication) extension of the SMTP
  # protocol, as defined by RFC 2554. If you don't know what SMTP authentication
-@@ -622,7 +626,7 @@
+@@ -623,7 +627,7 @@
  # included in the Exim binary. You will then need to set up the run time
  # configuration to make use of the mechanism(s) selected.
  
@@ -112,7 +113,7 @@
  # AUTH_CYRUS_SASL=yes
  # AUTH_DOVECOT=yes
  # AUTH_GSASL=yes
-@@ -630,7 +634,7 @@
+@@ -631,7 +635,7 @@
  # AUTH_HEIMDAL_GSSAPI=yes
  # AUTH_HEIMDAL_GSSAPI_PC=heimdal-gssapi
  # AUTH_HEIMDAL_GSSAPI_PC=heimdal-gssapi heimdal-krb5
@@ -121,7 +122,7 @@
  # AUTH_SPA=yes
  # AUTH_TLS=yes
  
-@@ -656,7 +660,7 @@
+@@ -657,7 +661,7 @@
  # one that is set in the headers_charset option. The default setting is
  # defined by this setting:
  
@@ -130,7 +131,7 @@
  
  # If you are going to make use of $header_xxx expansions in your configuration
  # file, or if your users are going to use them in filter files, and the normal
-@@ -745,7 +749,7 @@
+@@ -746,7 +750,7 @@
  # leave these settings commented out.
  
  # This setting is required for any TLS support (either OpenSSL or GnuTLS)
@@ -139,7 +140,7 @@
  
  # Uncomment one of these settings if you are using OpenSSL; pkg-config vs not
  # USE_OPENSSL_PC=openssl
-@@ -753,9 +757,9 @@
+@@ -754,9 +758,9 @@
  
  # Uncomment the first and either the second or the third of these if you
  # are using GnuTLS.  If you have pkg-config, then the second, else the third.
@@ -151,7 +152,7 @@
  
  # If using GnuTLS older than 2.10 and using pkg-config then note that Exim's
  # build process will require libgcrypt-config to exist in your $PATH.  A
-@@ -832,6 +836,7 @@
+@@ -833,6 +837,7 @@
  # to form the final file names. Some installations may want something like this:
  
  # LOG_FILE_PATH=/var/log/exim_%slog
@@ -159,7 +160,7 @@
  
  # which results in files with names /var/log/exim_mainlog, etc. The directory
  # in which the log files are placed must exist; Exim does not try to create
-@@ -880,7 +885,7 @@
+@@ -881,7 +886,7 @@
  # files. Both the name of the command and the suffix that it adds to files
  # need to be defined here. See also the EXICYCLOG_MAX configuration.
  
@@ -168,7 +169,7 @@
  COMPRESS_SUFFIX=gz
  
  
-@@ -895,7 +900,7 @@
+@@ -896,7 +901,7 @@
  # ZCAT_COMMAND=zcat
  #
  # Or specify the full pathname:
@@ -177,7 +178,7 @@
  
  #------------------------------------------------------------------------------
  # Compiling in support for embedded Perl: If you want to be able to
-@@ -927,6 +932,7 @@
+@@ -928,6 +933,7 @@
  
  # You probably need to add -lpam to EXTRALIBS, and in some releases of
  # GNU/Linux -ldl is also needed.
@@ -185,7 +186,7 @@
  
  
  #------------------------------------------------------------------------------
-@@ -935,7 +941,7 @@
+@@ -936,7 +942,7 @@
  # If you may want to use outbound (client-side) proxying, using Socks5,
  # uncomment the line below.
  
@@ -194,7 +195,7 @@
  
  # If you may want to use inbound (server-side) proxying, using Proxy Protocol,
  # uncomment the line below.
-@@ -1023,6 +1029,8 @@
+@@ -1024,6 +1030,8 @@
  
  # CYRUS_SASLAUTHD_SOCKET=/var/state/saslauthd/mux
  
@@ -203,7 +204,7 @@
  
  #------------------------------------------------------------------------------
  # TCP wrappers: If you want to use tcpwrappers from within Exim, uncomment
-@@ -1098,7 +1106,7 @@
+@@ -1099,7 +1107,7 @@
  #------------------------------------------------------------------------------
  # Uncomment this setting to include IPv6 support.
  
@@ -212,7 +213,7 @@
  
  ###############################################################################
  #              THINGS YOU ALMOST NEVER NEED TO MENTION                        #
-@@ -1328,6 +1336,7 @@
+@@ -1329,6 +1337,7 @@
  # file can be specified here. Some installations may want something like this:
  
  # PID_FILE_PATH=/var/lock/exim.pid
@@ -220,7 +221,7 @@
  
  # If PID_FILE_PATH is not defined, Exim writes a file in its spool directory
  # using the name "exim-daemon.pid".
-@@ -1361,6 +1370,7 @@
+@@ -1362,6 +1371,7 @@
  # messages become "invisible" to the normal management tools.
  
  # SUPPORT_MOVE_FROZEN_MESSAGES=yes

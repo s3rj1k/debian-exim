@@ -1,5 +1,5 @@
---- EDITME.old	2017-04-19 12:19:23.087531532 +0300
-+++ EDITME	2017-04-19 12:19:32.519676215 +0300
+--- EDITME.orig	2017-12-01 14:19:09.959704466 +0000
++++ EDITME	2017-12-01 14:22:27.050753809 +0000
 @@ -212,7 +212,7 @@
  
  # This one is very special-purpose, so is not included by default.
@@ -18,13 +18,15 @@
  
  
  #------------------------------------------------------------------------------
-@@ -306,14 +306,14 @@
+@@ -306,16 +306,16 @@
  LOOKUP_DSEARCH=yes
  # LOOKUP_IBASE=yes
  # LOOKUP_LDAP=yes
 -# LOOKUP_MYSQL=yes
+-# LOOKUP_MYSQL_PC=mariadb
 -LOOKUP_NIS=yes
 +LOOKUP_MYSQL=yes
++LOOKUP_MYSQL_PC=mariadb
 +# LOOKUP_NIS=yes
  # LOOKUP_NISPLUS=yes
  # LOOKUP_ORACLE=yes
@@ -32,11 +34,13 @@
  # LOOKUP_PGSQL=yes
  # LOOKUP_REDIS=yes
 -# LOOKUP_SQLITE=yes
+-# LOOKUP_SQLITE_PC=sqlite3
 +LOOKUP_SQLITE=yes
- # LOOKUP_SQLITE_PC=sqlite3
++LOOKUP_SQLITE_PC=sqlite3
  # LOOKUP_WHOSON=yes
  
-@@ -373,6 +373,9 @@
+ # These two settings are obsolete; all three lookups are compiled when
+@@ -374,6 +374,9 @@
  # LOOKUP_LIBS=-L/usr/local/lib -lldap -llber -lmysqlclient -lpq -lgds -lsqlite3
  
  
@@ -46,7 +50,7 @@
  #------------------------------------------------------------------------------
  # Compiling the Exim monitor: If you want to compile the Exim monitor, a
  # program that requires an X11 display, then EXIM_MONITOR should be set to the
-@@ -381,7 +384,7 @@
+@@ -382,7 +385,7 @@
  # files are defaulted in the OS/Makefile-Default file, but can be overridden in
  # local OS-specific make files.
  
@@ -55,7 +59,7 @@
  
  
  #------------------------------------------------------------------------------
-@@ -391,7 +394,7 @@
+@@ -392,7 +395,7 @@
  # and the MIME ACL. Please read the documentation to learn more about these
  # features.
  
@@ -64,7 +68,7 @@
  
  #------------------------------------------------------------------------------
  # If you're using ClamAV and are backporting fixes to an old version, instead
-@@ -453,9 +456,9 @@
+@@ -454,9 +457,9 @@
  # installed on your system (www.libspf2.org). Depending on where it is installed
  # you may have to edit the CFLAGS and LDFLAGS lines.
  
@@ -76,7 +80,7 @@
  
  # Uncomment the following lines to add SRS (Sender rewriting scheme) support.
  # You need to have libsrs_alt installed on your system (srs.mirtol.com).
-@@ -499,6 +502,10 @@
+@@ -500,6 +503,10 @@
  # Uncomment the following line to add queuefile transport support
  # EXPERIMENTAL_QUEUEFILE=yes
  
@@ -87,7 +91,7 @@
  ###############################################################################
  #                 THESE ARE THINGS YOU MIGHT WANT TO SPECIFY                  #
  ###############################################################################
-@@ -627,16 +634,16 @@
+@@ -628,16 +635,16 @@
  # configuration to make use of the mechanism(s) selected.
  
  AUTH_CRAM_MD5=yes
@@ -108,7 +112,7 @@
  
  # Heimdal through 1.5 required pkg-config 'heimdal-gssapi'; Heimdal 7.1
  # requires multiple pkg-config files to work with Exim, so the second example
-@@ -649,7 +656,7 @@
+@@ -650,7 +657,7 @@
  # Similarly for GNU SASL, unless pkg-config is used via AUTH_GSASL_PC.
  # Ditto for AUTH_HEIMDAL_GSSAPI(_PC).
  
@@ -117,7 +121,7 @@
  # AUTH_LIBS=-lgsasl
  # AUTH_LIBS=-lgssapi -lheimntlm -lkrb5 -lhx509 -lcom_err -lhcrypto -lasn1 -lwind -lroken -lcrypt
  
-@@ -689,6 +696,7 @@
+@@ -690,6 +697,7 @@
  #
  # HAVE_ICONV=yes
  # CFLAGS=-O -I/usr/local/include
@@ -125,7 +129,7 @@
  # EXTRALIBS_EXIM=-L/usr/local/lib -liconv
  #
  # but of course there may need to be other things in CFLAGS and EXTRALIBS_EXIM
-@@ -918,7 +926,7 @@
+@@ -919,7 +927,7 @@
  # that the local_scan API is made available by the linker. You may also need
  # to add -ldl to EXTRALIBS so that dlopen() is available to Exim.
  
@@ -134,7 +138,7 @@
  
  
  #------------------------------------------------------------------------------
-@@ -928,11 +936,11 @@
+@@ -929,11 +937,11 @@
  # support, which is intended for use in conjunction with the SMTP AUTH
  # facilities, is included only when requested by the following setting:
  
@@ -148,7 +152,7 @@
  
  
  #------------------------------------------------------------------------------
-@@ -946,7 +954,7 @@
+@@ -947,7 +955,7 @@
  # If you may want to use inbound (server-side) proxying, using Proxy Protocol,
  # uncomment the line below.
  
@@ -157,7 +161,7 @@
  
  
  #------------------------------------------------------------------------------
-@@ -1284,7 +1292,7 @@
+@@ -1285,7 +1293,7 @@
  # local part) can be increased by changing this value. It should be set to
  # a multiple of 16.
  
