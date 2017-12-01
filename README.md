@@ -31,7 +31,7 @@ rm -vrf debian-7
 ## get exim4 sources:
 
 ```
-wget --no-check-certificate -qO- https://ftp.exim.org/pub/exim/exim4/exim-4.89.tar.gz | tar -xvz --strip=1 --exclude='.gitignore' --exclude='.gitattributes' --exclude='.ctags' -C .
+wget --no-check-certificate -qO- https://ftp.exim.org/pub/exim/exim4/exim-4.89.1.tar.gz | tar -xvz --strip=1 --exclude='.gitignore' --exclude='.gitattributes' --exclude='.ctags' -C .
 ```
 
 ## build
