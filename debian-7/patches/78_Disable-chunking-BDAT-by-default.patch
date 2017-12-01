@@ -8,7 +8,7 @@ Last-Update: 2017-01-19
 
 --- a/doc/spec.txt
 +++ b/doc/spec.txt
-@@ -13215,9 +13215,9 @@ There is a slight performance penalty fo
+@@ -13224,9 +13224,9 @@
  preceding 4.88 had these disabled by default; high-rate installations confident
  they will never run out of resources may wish to deliberately disable them.
  
@@ -21,7 +21,7 @@ Last-Update: 2017-01-19
  
  The CHUNKING extension (RFC3030) will be advertised in the EHLO message to
  these hosts. Hosts may use the BDAT command as an alternate to DATA.
-@@ -22522,9 +22522,9 @@ connects. If authentication fails, Exim
+@@ -22540,9 +22540,9 @@
  unauthenticated. See also hosts_require_auth, and chapter 33 for details of
  authentication.
  
@@ -36,7 +36,7 @@ Last-Update: 2017-01-19
  CHUNKING support, Exim will attempt to use BDAT commands rather than DATA. BDAT
 --- a/src/globals.c
 +++ b/src/globals.c
-@@ -498,7 +498,7 @@ BOOL    check_rfc2047_length   = TRUE;
+@@ -500,7 +500,7 @@
  int     check_spool_inodes     = 100;
  int     check_spool_space      = 10*1024;	/* 10K Kbyte == 10MB */
  
@@ -47,7 +47,7 @@ Last-Update: 2017-01-19
  BOOL    chunking_offered       = FALSE;
 --- a/src/transports/smtp.c
 +++ b/src/transports/smtp.c
-@@ -200,7 +200,7 @@ smtp_transport_options_block smtp_transp
+@@ -200,7 +200,7 @@
    NULL,                /* serialize_hosts */
    NULL,                /* hosts_try_auth */
    NULL,                /* hosts_require_auth */

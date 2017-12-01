@@ -4,9 +4,9 @@ Origin: vendor
 Forwarded: no
 Last-Update: 2013-09-28
 
---- exim4-4.82~rc1.orig/src/convert4r4.src
-+++ exim4-4.82~rc1/src/convert4r4.src
-@@ -652,6 +652,32 @@ return defined $main{$_[0]} && $main{$_[
+--- a/src/convert4r4.src
++++ b/src/convert4r4.src
+@@ -654,6 +654,32 @@
  
  print STDERR "Runtime configuration file converter for Exim release 4.\n";
  
