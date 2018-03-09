@@ -5,9 +5,9 @@ Origin: vendor
 Forwarded: not-needed
 Last-Update: 2013-09-28
 
---- a/src/eximstats.src
-+++ b/src/eximstats.src
-@@ -501,6 +501,10 @@
+--- exim4-4.82~rc1.orig/src/eximstats.src
++++ exim4-4.82~rc1/src/eximstats.src
+@@ -501,6 +501,10 @@ To install these, download and unpack th
   make test
   make install
  

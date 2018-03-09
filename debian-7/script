@@ -23,3 +23,6 @@ if test -r /etc/mailname ; then
 	eval echo -n 'mailname:' $REDIR
 	eval cat /etc/mailname $REDIR
 fi
+if test -r  /etc/default/exim4 ; then
+	eval cat /etc/default/exim4 $REDIR
+fi

@@ -1,5 +1,5 @@
-exim4 (4.89.1-1a) wheezy; urgency=medium
+exim4 (4.90.1-1a) jessie; urgency=medium
 
   * Rebuild for Debian 8.x (Jessie) custom heavy version.
 
- -- s3rj1k <evasive.gyron@gmail.com>  Fri, 01 Dec 2017 18:37:18 +0100
+ -- s3rj1k <evasive.gyron@gmail.com>  Fri, 09 Mar 2018 12:00:00 +0100 

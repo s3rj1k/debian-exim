@@ -1,7 +1,4 @@
-## 50_localscan_dlopen.dpatch by Marc MERLIN
-
-
-Description: Allow to use and switch between different local_scan functions
+Description: Allow one to use and switch between different local_scan functions
  without recompiling exim.
  http://marc.merlins.org/linux/exim/files/sa-exim-current/ Original patch from
  David Woodhouse, modified first by Derrick 'dman' Hudson and then by Marc
@@ -13,7 +10,7 @@ Last-Update: 2014-12-01
 
 --- a/src/EDITME
 +++ b/src/EDITME
-@@ -804,6 +804,21 @@
+@@ -785,6 +785,21 @@ HEADERS_CHARSET="ISO-8859-1"
  
  
  #------------------------------------------------------------------------------
@@ -37,7 +34,7 @@ Last-Update: 2014-12-01
  # the documentation in "info" format, first fetch the Texinfo documentation
 --- a/src/config.h.defaults
 +++ b/src/config.h.defaults
-@@ -28,6 +28,8 @@
+@@ -28,6 +28,8 @@ it's a default value. */
  
  #define AUTH_VARS                     3
  
@@ -48,7 +45,7 @@ Last-Update: 2014-12-01
  #define CONFIGURE_FILE
 --- a/src/globals.c
 +++ b/src/globals.c
-@@ -140,6 +140,10 @@
+@@ -140,6 +140,10 @@ int     dsn_ret                = 0;
  const pcre  *regex_DSN         = NULL;
  uschar *dsn_advertise_hosts    = NULL;
  
@@ -61,7 +58,7 @@ Last-Update: 2014-12-01
  BOOL    gnutls_allow_auto_pkcs11 = FALSE;
 --- a/src/globals.h
 +++ b/src/globals.h
-@@ -133,6 +133,9 @@
+@@ -133,6 +133,9 @@ extern int      dsn_ret;               /
  extern const pcre  *regex_DSN;         /* For recognizing DSN settings */
  extern uschar  *dsn_advertise_hosts;   /* host for which TLS is advertised */
  
@@ -254,7 +251,7 @@ Last-Update: 2014-12-01
  /* End of local_scan.c */
 --- a/src/local_scan.h
 +++ b/src/local_scan.h
-@@ -17,6 +17,7 @@
+@@ -17,6 +17,7 @@ settings, and the store functions. */
  
  #include <stdarg.h>
  #include <sys/types.h>
@@ -262,7 +259,7 @@ Last-Update: 2014-12-01
  #include "config.h"
  #include "mytypes.h"
  #include "store.h"
-@@ -192,4 +193,6 @@
+@@ -192,4 +193,6 @@ extern uschar *string_copy(const uschar
  extern uschar *string_copyn(const uschar *, int);
  extern uschar *string_sprintf(const char *, ...) ALMOST_PRINTF(1,2);
  
@@ -271,7 +268,7 @@ Last-Update: 2014-12-01
  /* End of local_scan.h */
 --- a/src/readconf.c
 +++ b/src/readconf.c
-@@ -318,6 +318,9 @@
+@@ -313,6 +313,9 @@ static optionlist optionlist_config[] =
    { "local_from_prefix",        opt_stringptr,   &local_from_prefix },
    { "local_from_suffix",        opt_stringptr,   &local_from_suffix },
    { "local_interfaces",         opt_stringptr,   &local_interfaces },

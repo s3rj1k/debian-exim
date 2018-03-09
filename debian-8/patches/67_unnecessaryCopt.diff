@@ -6,7 +6,7 @@ Last-Update: 2014-12-01
 
 --- a/src/exicyclog.src
 +++ b/src/exicyclog.src
-@@ -146,10 +146,10 @@
+@@ -151,10 +151,10 @@ st='	 '
  exim_path=`grep "^[$st]*exim_path" $config | sed "s/.*=[$st]*//"`
  if test "$exim_path" = ""; then exim_path=BIN_DIRECTORY/exim4; fi
  
@@ -21,7 +21,7 @@ Last-Update: 2014-12-01
  # If log_file_path contains only "syslog" then no Exim log files are in use.
 --- a/src/eximon.src
 +++ b/src/eximon.src
-@@ -74,8 +74,8 @@
+@@ -81,8 +81,8 @@ st='	 '
  EXIM_PATH=`grep "^[$st]*exim_path" $config | sed "s/.*=[$st]*//"`
  if test "$EXIM_PATH" = ""; then EXIM_PATH=BIN_DIRECTORY/exim4; fi
  
@@ -34,7 +34,7 @@ Last-Update: 2014-12-01
  # is unable to display a log tail unless EXIMON_LOG_FILE_PATH is set to tell
 --- a/src/exinext.src
 +++ b/src/exinext.src
-@@ -91,8 +91,8 @@
+@@ -98,8 +98,8 @@ if [ "$exim_path" = "" ]; then
  fi
  
  if test "$exim_path" = ""; then exim_path=BIN_DIRECTORY/exim4; fi
@@ -45,7 +45,7 @@ Last-Update: 2014-12-01
  
  # Now do the job. Perl uses $ so frequently that we don't want to have to
  # escape them all from the shell, so pass in shell variable values as
-@@ -137,7 +137,7 @@
+@@ -144,7 +144,7 @@ perl - $exim_path "$eximmacdef" $argone
    # Run Exim to get a list of hosts for the given domain; for
    # each one construct the appropriate retry key.
  
@@ -56,7 +56,7 @@ Last-Update: 2014-12-01
    while (<LIST>)
 --- a/src/exiwhat.src
 +++ b/src/exiwhat.src
-@@ -89,8 +89,8 @@
+@@ -96,8 +96,8 @@ fi
  st='	 '
  exim_path=`grep "^[$st]*exim_path" $config | sed "s/.*=[$st]*//"`
  if test "$exim_path" = ""; then exim_path=BIN_DIRECTORY/exim4; fi

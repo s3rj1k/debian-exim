@@ -219,36 +219,11 @@ src/pdkim/*
 
 PDKIM - a RFC4871 (DKIM) implementation
 http://duncanthrax.net/pdkim/
-Copyright (C) 2009 - 2016  Tom Kistner <tom@duncanthrax.net>
-Copyright (C) 2016 - 2017 Jeremy Harris <jgh@exim.org>
+Copyright (C) 2009      Tom Kistner <tom@duncanthrax.net>
 
-Includes code from the PolarSSL project.
-http://polarssl.org
-Copyright (C) 2009      Paul Bakker <polarssl_maintainer@polarssl.org>
-Copyright (C) 2006-2008 Christophe Devine
-Copyright (C) 2006-2010, Brainspark B.V.
+No longer includes code from the PolarSSL project.
+Copyright (C) 2016 Jeremy Harris <jgh@exim.org>
 
 This copy of PDKIM is included with Exim. For a standalone distribution,
 visit http://duncanthrax.net/pdkim/.
-
-License: Both the parts from PolarSSL and the original code are licensed
-under GPLv2+.
-
-Please note that the parts copied from PolarSSL are only used with ancient
-(< 2.10) GnuTLS.
 -----------------------------------------------------------------
-
------------------------------------------------------------------
-Generating a tarball from CVS snapshot.
-
-Upstream is keeping sourcecode and documentation (including changelog) in
-separate CVS modules: exim-src and exim-doc. However the release tarball
-contains parts from both modules.
-
-1. Use exim-src modules as base
-2. Generate a doc subdirectory containing he contents of exim-doc/doc-txt/.
-3. Take exim-doc and build the txt files You will need xfpt, xmlto, docbook-xsl
-and w3m.
-cd doc-docbook ; make spec.txt filter.txt exim.8
-Copy the three files to exim-version/doc/
-

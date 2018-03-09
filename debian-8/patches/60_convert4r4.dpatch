@@ -6,7 +6,7 @@ Last-Update: 2013-09-28
 
 --- a/src/convert4r4.src
 +++ b/src/convert4r4.src
-@@ -654,6 +654,32 @@
+@@ -666,6 +666,32 @@ return defined $main{$_[0]} && $main{$_[
  
  print STDERR "Runtime configuration file converter for Exim release 4.\n";
  

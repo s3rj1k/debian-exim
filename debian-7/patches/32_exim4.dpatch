@@ -1,4 +1,4 @@
-Description: Accomodate source for installing exim as exim4.
+Description: Accommodate source for installing exim as exim4.
 Author: Andreas Metzler <ametzler@debian.org>
 Origin: vendor
 Forwarded: not-needed
@@ -6,7 +6,7 @@ Last-Update: 2013-09-28
 
 --- a/OS/Makefile-Linux
 +++ b/OS/Makefile-Linux
-@@ -28,9 +28,9 @@
+@@ -28,9 +28,9 @@ XLFLAGS=-L$(X11)/lib
  X11_LD_LIB=$(X11)/lib
  
  EXIWHAT_PS_ARG=ax
@@ -20,7 +20,7 @@ Last-Update: 2013-09-28
  # End
 --- a/src/exicyclog.src
 +++ b/src/exicyclog.src
-@@ -144,7 +144,7 @@
+@@ -149,7 +149,7 @@ done
  
  st='	 '
  exim_path=`grep "^[$st]*exim_path" $config | sed "s/.*=[$st]*//"`
@@ -31,7 +31,7 @@ Last-Update: 2013-09-28
  
 --- a/src/exim_checkaccess.src
 +++ b/src/exim_checkaccess.src
-@@ -52,7 +52,7 @@
+@@ -52,7 +52,7 @@ done
  # a tab to keep the tab in one place.
  
  exim_path=`perl -ne 'chop;if (/^\s*exim_path\s*=\s*(.*)/){print "$1\n";last;}' $config`
@@ -42,7 +42,7 @@ Last-Update: 2013-09-28
  #########################################################################
 --- a/src/eximon.src
 +++ b/src/eximon.src
-@@ -72,7 +72,7 @@
+@@ -79,7 +79,7 @@ config=${EXIMON_EXIM_CONFIG-$config}
  
  st='	 '
  EXIM_PATH=`grep "^[$st]*exim_path" $config | sed "s/.*=[$st]*//"`
@@ -53,7 +53,7 @@ Last-Update: 2013-09-28
  LOG_FILE_PATH=`$EXIM_PATH -C $config -bP log_file_path | sed 's/.*=[  ]*//'`
 --- a/src/exinext.src
 +++ b/src/exinext.src
-@@ -90,7 +90,7 @@
+@@ -97,7 +97,7 @@ if [ "$exim_path" = "" ]; then
    exim_path=`grep "^[$st]*exim_path" $config | sed "s/.*=[$st]*//"`
  fi
  
@@ -62,7 +62,7 @@ Last-Update: 2013-09-28
  spool_directory=`$exim_path $eximmacdef -C $config -bP spool_directory | sed 's/.*=[  ]*//'`
  qualify_domain=`$exim_path $eximmacdef -C $config -bP qualify_domain | sed 's/.*=[  ]*//'`
  
-@@ -174,7 +174,7 @@
+@@ -181,7 +181,7 @@ perl - $exim_path "$eximmacdef" $argone
  
    # Run exim_dumpdb to get out the retry data and pick off what we want
  
@@ -73,8 +73,8 @@ Last-Update: 2013-09-28
    while (<DATA>)
 --- a/src/exiqgrep.src
 +++ b/src/exiqgrep.src
-@@ -22,7 +22,7 @@
- use Getopt::Std;
+@@ -24,7 +24,7 @@ use Getopt::Std;
+ use File::Basename;
  
  # Have this variable point to your exim binary.
 -my $exim = 'BIN_DIRECTORY/exim';
@@ -84,7 +84,7 @@ Last-Update: 2013-09-28
  my %opt;
 --- a/src/exiwhat.src
 +++ b/src/exiwhat.src
-@@ -88,7 +88,7 @@
+@@ -95,7 +95,7 @@ fi
  
  st='	 '
  exim_path=`grep "^[$st]*exim_path" $config | sed "s/.*=[$st]*//"`
@@ -95,7 +95,7 @@ Last-Update: 2013-09-28
  
 --- a/src/globals.c
 +++ b/src/globals.c
-@@ -712,7 +712,7 @@
+@@ -725,7 +725,7 @@ const uschar *event_name         = NULL;
  
  gid_t   exim_gid               = EXIM_GID;
  BOOL    exim_gid_set           = TRUE;          /* This gid is always set */

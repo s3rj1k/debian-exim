@@ -7,5 +7,4 @@
 60_convert4r4.dpatch
 67_unnecessaryCopt.diff
 70_remove_exim-users_references.dpatch
-78_Disable-chunking-BDAT-by-default.patch
 98_log_buf.patch

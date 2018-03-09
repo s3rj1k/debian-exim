@@ -3,7 +3,7 @@ Section: mail
 Priority: standard
 Maintainer: Exim4 Maintainers <pkg-exim4-maintainers@lists.alioth.debian.org>
 Uploaders: Andreas Metzler <ametzler@debian.org>,Marc Haber <mh+debian-packages@zugschlus.de>
-Homepage: http://www.exim.org/
+Homepage: https://www.exim.org/
 Standards-Version: 3.9.3
 Vcs-Git: https://anonscm.debian.org/git/pkg-exim4/exim4.git
 Vcs-Browser: https://anonscm.debian.org/git/pkg-exim4/exim4.git
@@ -15,6 +15,7 @@ Build-Depends: debhelper (>= 7.0.15), po-debconf, docbook-xsl, xsltproc,
 
 Package: exim4-base
 Architecture: any
+Priority: optional
 Breaks: exim4-daemon-light (<<${Upstream-Version}),
  exim4-daemon-heavy (<<${Upstream-Version}),
  exim4-daemon-custom (<<${Upstream-Version})
@@ -56,6 +57,7 @@ Description: support files for all Exim MTA (v4) packages
 
 Package: exim4-config
 Architecture: all
+Priority: optional
 Breaks: exim4-daemon-light (<< 4.80-7+deb7u2), exim4-daemon-heavy (<< 4.80-7+deb7u2)
 Provides: exim4-config-2
 Conflicts: exim, exim-tls, exim4-config, exim4-config-2, ${MTA-Conflicts}
@@ -90,6 +92,7 @@ Description: configuration for the Exim MTA (v4)
 
 Package: exim4-daemon-light
 Architecture: any
+Priority: optional
 Provides: mail-transport-agent, exim4-localscanapi-1.0, exim4-localscanapi-1.1, default-mta
 Conflicts: mail-transport-agent
 Replaces: mail-transport-agent, exim4-base (<= 4.61-1)
@@ -119,6 +122,7 @@ Description: lightweight Exim MTA (v4) daemon
 
 Package: exim4
 Architecture: all
+Priority: optional
 Depends: ${misc:Depends}, debconf (>= 1.4.69) | cdebconf (>= 0.39), exim4-base (>= ${Upstream-Version}), exim4-daemon-light | exim4-daemon-heavy | exim4-daemon-custom
 Description: metapackage to ease Exim MTA (v4) installation
  Exim (v4) is a mail transport agent. exim4 is the metapackage depending
@@ -322,7 +326,7 @@ Description: debugging symbols for the Exim MTA "heavy" daemon
 
 Package: exim4-dev
 Architecture: any
-Priority: extra
+Priority: optional
 Depends: ${misc:Depends}
 Description: header files for the Exim MTA (v4) packages
  Exim (v4) is a mail transport agent. This package contains header
