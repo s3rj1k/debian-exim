@@ -1,5 +1,0 @@
-exim4 (4.90.1-1a) wheezy; urgency=medium
-
-  * https://github.com/Exim/exim/blob/exim-4_90+fixes/doc/doc-txt/ChangeLog
-
- -- s3rj1k <evasive.gyron@gmail.com>  Fri, 09 Mar 2018 12:00:00 +0100 

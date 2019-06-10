@@ -1,3 +1,0 @@
-Tests: daemon security
-Depends: exim4, python
-Restrictions: needs-root

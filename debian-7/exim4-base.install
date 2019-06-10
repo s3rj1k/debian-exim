@@ -1,3 +1,0 @@
-debian/script usr/share/bug/exim4-base
-debian/gnutls-params-2048 usr/share/exim4
-debian/exim4_refresh_gnutls-params usr/share/exim4

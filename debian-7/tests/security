@@ -1,6 +1,0 @@
-#!/bin/sh
-#----------------------
-# Testing exim security
-#----------------------
-set -e
-python `dirname $0`/CVE-2010-4344.py localhost 2>&1
