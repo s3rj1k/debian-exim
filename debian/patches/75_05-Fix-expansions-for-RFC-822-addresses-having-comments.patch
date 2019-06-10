@@ -1,0 +1,91 @@
+From f634b80846cc7ffcab65c9855bcb35312f0232e8 Mon Sep 17 00:00:00 2001
+From: Jasen Betts <jasen@xnet.co.nz>
+Date: Mon, 18 Feb 2019 13:52:16 +0000
+Subject: [PATCH 1/5] Fix expansions for RFC 822 addresses having comments in
+ local-part and/or domain.  Bug 2375
+
+(cherry picked from commit e2ff8e24f41caca3623228b1ec66a3f3961ecad6)
+---
+ doc/ChangeLog        |  3 +++
+ src/expand.c             | 19 +++++++------------
+ test/scripts/0000-Basic/0002 |  7 +++++++
+ test/stdout/0002             |  7 +++++++
+ 4 files changed, 24 insertions(+), 12 deletions(-)
+
+diff --git a/doc/ChangeLog b/doc/ChangeLog
+index 867a1d8a..9659da32 100644
+--- a/doc/ChangeLog
++++ b/doc/ChangeLog
+@@ -16,10 +16,13 @@ JH/07 GnuTLS: Our use of late (post-handshake) certificate verification, under
+       to the client until the first read of encrypted data (typically the
+       response to EHLO).  Add detection for that case and treat it as a failed
+       TLS connection attempt, so that the normal retry-in-clear can work (if
+       suitably configured).
+ 
++JB/01 BZg 2375: fix expansions of 822 addresses having comments in local-part
++      and/or domain.  Found and fixed by Jason Betts.
++
+ 
+ Exim version 4.92
+ -----------------
+ 
+ JH/01 Remove code calling the customisable local_scan function, unless a new
+diff --git a/src/expand.c b/src/expand.c
+index 2c290251..35ede718 100644
+--- a/src/expand.c
++++ b/src/expand.c
+@@ -7071,20 +7071,15 @@ while (*s != 0)
+         uschar * error;
+         int start, end, domain;
+         uschar * t = parse_extract_address(sub, &error, &start, &end, &domain,
+           FALSE);
+         if (t)
+-          if (c != EOP_DOMAIN)
+-            {
+-            if (c == EOP_LOCAL_PART && domain != 0) end = start + domain - 1;
+-            yield = string_catn(yield, sub+start, end-start);
+-            }
+-          else if (domain != 0)
+-            {
+-            domain += start;
+-            yield = string_catn(yield, sub+domain, end-domain);
+-            }
++	  yield = c == EOP_DOMAIN
++	    ? string_cat(yield, t + domain)
++	    : c == EOP_LOCAL_PART && domain > 0
++	    ? string_catn(yield, t, domain - 1 )
++	    : string_cat(yield, t);
+         continue;
+         }
+ 
+       case EOP_ADDRESSES:
+         {
+@@ -7104,11 +7099,11 @@ while (*s != 0)
+             }
+         f.parse_allow_group = TRUE;
+ 
+         for (;;)
+           {
+-          uschar *p = parse_find_address_end(sub, FALSE);
++          uschar * p = parse_find_address_end(sub, FALSE);
+           uschar saveend = *p;
+           *p = '\0';
+           address = parse_extract_address(sub, &error, &start, &end, &domain,
+             FALSE);
+           *p = saveend;
+@@ -7117,11 +7112,11 @@ while (*s != 0)
+           done in chunks by searching for the separator character. At the
+           start, unless we are dealing with the first address of the output
+           list, add in a space if the new address begins with the separator
+           character, or is an empty string. */
+ 
+-          if (address != NULL)
++          if (address)
+             {
+             if (yield->ptr != save_ptr && address[0] == *outsep)
+               yield = string_catn(yield, US" ", 1);
+ 
+             for (;;)
+-- 
+2.20.1
+

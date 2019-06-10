@@ -1,0 +1,69 @@
+From b2734f7b45111f9b7de790c7b334a2ece47675b5 Mon Sep 17 00:00:00 2001
+From: Jeremy Harris <jgh146exb@wizmail.org>
+Date: Sat, 9 Feb 2019 16:56:59 +0000
+Subject: [PATCH 1/7] Fix json extract operator for unfound case
+
+(cherry picked from commit e73798976812e652320f096870359ef35ed069ff)
+---
+ doc/doc-docbook/spec.xfpt    |  4 ++++
+ src/expand.c             | 13 ++++++++-----
+ test/scripts/0000-Basic/0002 |  3 +++
+ test/stdout/0002             |  3 +++
+ 4 files changed, 18 insertions(+), 5 deletions(-)
+
+--- a/src/expand.c
++++ b/src/expand.c
+@@ -3901,7 +3901,8 @@ return NULL;
+ /* Pull off the leading array or object element, returning
+ a copy in an allocated string.  Update the list pointer.
+ 
+-The element may itself be an abject or array.
++The element may itself be an object or array.
++Return NULL when the list is empty.
+ */
+ 
+ uschar *
+@@ -3923,6 +3924,7 @@ for (item = s;
+     case '}': object_depth--; break;
+     }
+ *list = *s ? s+1 : s;
++if (item == s) return NULL;
+ item = string_copyn(item, s - item);
+ DEBUG(D_expand) debug_printf_indent("  json ele: '%s'\n", item);
+ return US item;
+@@ -5790,10 +5792,11 @@ while (*s != 0)
+ 	      }
+ 	    while (field_number > 0 && (item = json_nextinlist(&list)))
+ 	      field_number--;
+-	    s = item;
+-	    lookup_value = s;
+-	    while (*s) s++;
+-	    while (--s >= lookup_value && isspace(*s)) *s = '\0';
++	    if ((lookup_value = s = item))
++	      {
++	      while (*s) s++;
++	      while (--s >= lookup_value && isspace(*s)) *s = '\0';
++	      }
+ 	    }
+ 	  else
+ 	    {
+--- a/doc/spec.txt
++++ b/doc/spec.txt
+@@ -8776,6 +8776,8 @@ ${extract json{<key>}{<string1>}{<string
+     The braces, commas and colons, and the quoting of the member name are
+     required; the spaces are optional. Matching of the key against the member
+     names is done case-sensitively.
++    If a returned value is a JSON string, it retains its leading and
++    trailing quotes.
+ 
+     The results of matching are handled as above.
+ 
+@@ -8813,6 +8815,8 @@ ${extract json{<number>}}{<string1>}{<st
+ 
+     Field selection and result handling is as above; there is no choice of
+     field separator.
++    If a returned value is a JSON string, it retains its leading and
++    trailing quotes.
+ 
+ ${filter{<string>}{<condition>}}
+ 
