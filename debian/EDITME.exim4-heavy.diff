@@ -1,0 +1,177 @@
+--- EDITME.ORIG	2019-06-11 13:36:49.804151020 +0300
++++ EDITME	2019-06-11 13:37:06.028325237 +0300
+@@ -217,7 +217,7 @@
+ 
+ # This one is very special-purpose, so is not included by default.
+ 
+-# ROUTER_IPLOOKUP=yes
++ROUTER_IPLOOKUP=yes
+ 
+ 
+ #------------------------------------------------------------------------------
+@@ -249,7 +249,7 @@
+ 
+ SUPPORT_MAILDIR=yes
+ SUPPORT_MAILSTORE=yes
+-# SUPPORT_MBX=yes
++SUPPORT_MBX=yes
+ 
+ 
+ #------------------------------------------------------------------------------
+@@ -311,15 +311,15 @@
+ LOOKUP_DSEARCH=yes
+ # LOOKUP_IBASE=yes
+ # LOOKUP_LDAP=yes
+-# LOOKUP_MYSQL=yes
++LOOKUP_MYSQL=yes
+ # LOOKUP_MYSQL_PC=mariadb
+-LOOKUP_NIS=yes
++# LOOKUP_NIS=yes
+ # LOOKUP_NISPLUS=yes
+ # LOOKUP_ORACLE=yes
+ LOOKUP_PASSWD=yes
+ # LOOKUP_PGSQL=yes
+ # LOOKUP_REDIS=yes
+-# LOOKUP_SQLITE=yes
++LOOKUP_SQLITE=yes
+ # LOOKUP_SQLITE_PC=sqlite3
+ # LOOKUP_WHOSON=yes
+ 
+@@ -385,6 +385,9 @@
+ # LOOKUP_LIBS=-L/usr/local/lib -lldap -llber -lmysqlclient -lpq -lgds -lsqlite3
+ 
+ 
++LOOKUP_INCLUDE=-I/usr/include/mysql
++LOOKUP_LIBS=-lmysqlclient -lsqlite3
++
+ #------------------------------------------------------------------------------
+ # Compiling the Exim monitor: If you want to compile the Exim monitor, a
+ # program that requires an X11 display, then EXIM_MONITOR should be set to the
+@@ -393,7 +396,7 @@
+ # files are defaulted in the OS/Makefile-Default file, but can be overridden in
+ # local OS-specific make files.
+ 
+-EXIM_MONITOR=eximon.bin
++# EXIM_MONITOR=eximon.bin
+ 
+ 
+ #------------------------------------------------------------------------------
+@@ -403,18 +406,18 @@
+ # and the MIME ACL. Please read the documentation to learn more about these
+ # features.
+ 
+-# WITH_CONTENT_SCAN=yes
++WITH_CONTENT_SCAN=yes
+ 
+ # If you have content scanning you may wish to only include some of the scanner
+ # interfaces.  Uncomment any of these lines to remove that code.
+ 
+-# DISABLE_MAL_FFROTD=yes
+-# DISABLE_MAL_FFROT6D=yes
+-# DISABLE_MAL_DRWEB=yes
+-# DISABLE_MAL_FSECURE=yes
+-# DISABLE_MAL_SOPHIE=yes
++DISABLE_MAL_FFROTD=yes
++DISABLE_MAL_FFROT6D=yes
++DISABLE_MAL_DRWEB=yes
++DISABLE_MAL_FSECURE=yes
++DISABLE_MAL_SOPHIE=yes
+ # DISABLE_MAL_CLAM=yes
+-# DISABLE_MAL_AVAST=yes
++DISABLE_MAL_AVAST=yes
+ # DISABLE_MAL_SOCK=yes
+ # DISABLE_MAL_CMDLINE=yes
+ 
+@@ -517,6 +520,10 @@
+ # Ref: https://datatracker.ietf.org/doc/draft-fenton-smtp-require-tls
+ # EXPERIMENTAL_REQUIRETLS=yes
+ 
++# Uncomment the following line to add Redis support
++# CFLAGS += -I/usr/local/include
++# LDFLAGS += -lhiredis
++
+ ###############################################################################
+ #                 THESE ARE THINGS YOU MIGHT WANT TO SPECIFY                  #
+ ###############################################################################
+@@ -645,16 +652,16 @@
+ # configuration to make use of the mechanism(s) selected.
+ 
+ AUTH_CRAM_MD5=yes
+-# AUTH_CYRUS_SASL=yes
+-# AUTH_DOVECOT=yes
++AUTH_CYRUS_SASL=yes
++AUTH_DOVECOT=yes
+ # AUTH_GSASL=yes
+ # AUTH_GSASL_PC=libgsasl
+ # AUTH_HEIMDAL_GSSAPI=yes
+ # AUTH_HEIMDAL_GSSAPI_PC=heimdal-gssapi
+ # AUTH_HEIMDAL_GSSAPI_PC=heimdal-gssapi heimdal-krb5
+ AUTH_PLAINTEXT=yes
+-# AUTH_SPA=yes
+-# AUTH_TLS=yes
++AUTH_SPA=yes
++AUTH_TLS=yes
+ 
+ # Heimdal through 1.5 required pkg-config 'heimdal-gssapi'; Heimdal 7.1
+ # requires multiple pkg-config files to work with Exim, so the second example
+@@ -667,7 +674,7 @@
+ # Similarly for GNU SASL, unless pkg-config is used via AUTH_GSASL_PC.
+ # Ditto for AUTH_HEIMDAL_GSSAPI(_PC).
+ 
+-# AUTH_LIBS=-lsasl2
++AUTH_LIBS=-lsasl2
+ # AUTH_LIBS=-lgsasl
+ # AUTH_LIBS=-lgssapi -lheimntlm -lkrb5 -lhx509 -lcom_err -lhcrypto -lasn1 -lwind -lroken -lcrypt
+ 
+@@ -707,6 +714,7 @@
+ #
+ # HAVE_ICONV=yes
+ # CFLAGS=-O -I/usr/local/include
++#
+ # EXTRALIBS_EXIM=-L/usr/local/lib -liconv
+ #
+ # but of course there may need to be other things in CFLAGS and EXTRALIBS_EXIM
+@@ -949,11 +957,11 @@
+ # support, which is intended for use in conjunction with the SMTP AUTH
+ # facilities, is included only when requested by the following setting:
+ 
+-# SUPPORT_PAM=yes
++SUPPORT_PAM=yes
+ 
+ # You probably need to add -lpam to EXTRALIBS, and in some releases of
+ # GNU/Linux -ldl is also needed.
+-EXTRALIBS=-ldl
++EXTRALIBS=-lpthread -lz -ldl -lpam -export-dynamic
+ 
+ 
+ #------------------------------------------------------------------------------
+@@ -967,7 +975,7 @@
+ # If you may want to use inbound (server-side) proxying, using Proxy Protocol,
+ # uncomment the line below.
+ 
+-# SUPPORT_PROXY=yes
++SUPPORT_PROXY=yes
+ 
+ 
+ #------------------------------------------------------------------------------
+@@ -991,9 +999,9 @@
+ # installed on your system (www.libspf2.org). Depending on where it is installed
+ # you may have to edit the CFLAGS and LDFLAGS lines.
+ 
+-# SUPPORT_SPF=yes
++SUPPORT_SPF=yes
+ # CFLAGS  += -I/usr/local/include
+-# LDFLAGS += -lspf2
++LDFLAGS += -lspf2
+ 
+ 
+ #------------------------------------------------------------------------------
+@@ -1322,7 +1330,7 @@
+ # local part) can be increased by changing this value. It should be set to
+ # a multiple of 16.
+ 
+-# MAX_NAMED_LIST=16
++MAX_NAMED_LIST=64
+ 
+ 
+ #------------------------------------------------------------------------------

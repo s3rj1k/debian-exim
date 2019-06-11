@@ -1,3 +1,0 @@
-debian/debconf/update-exim4.conf.template usr/sbin
-debian/debconf/exim4.conf.template etc/exim4
-debian/script usr/share/bug/exim4-config
