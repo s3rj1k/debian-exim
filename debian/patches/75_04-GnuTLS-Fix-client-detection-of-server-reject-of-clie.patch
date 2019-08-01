@@ -20,11 +20,11 @@ Subject: [PATCH 7/7] GnuTLS: Fix client detection of server reject of client
  test/scripts/2000-GnuTLS/2027 |  2 +
  12 files changed, 111 insertions(+), 44 deletions(-)
 
-diff --git a/doc/ChangeLog b/doc/ChangeLog
-index 66c8a7a1..867a1d8a 100644
---- a/doc/ChangeLog
-+++ b/doc/ChangeLog
-@@ -11,6 +11,13 @@ Since version 4.92
+Index: BUILD/doc/ChangeLog
+===================================================================
+--- BUILD.orig/doc/ChangeLog
++++ BUILD/doc/ChangeLog
+@@ -17,6 +17,13 @@ Since version 4.92
  JH/06 Fix buggy handling of autoreply bounce_return_size_limit, and a possible
        buffer overrun for (non-chunking) other transports.
  
@@ -38,10 +38,10 @@ index 66c8a7a1..867a1d8a 100644
  
  Exim version 4.92
  -----------------
-diff --git a/src/deliver.c b/src/deliver.c
-index 664d0045..e1799411 100644
---- a/src/deliver.c
-+++ b/src/deliver.c
+Index: BUILD/src/deliver.c
+===================================================================
+--- BUILD.orig/src/deliver.c
++++ BUILD/src/deliver.c
 @@ -7433,7 +7433,7 @@ if (addr_senddsn)
  
      tctx.u.fd = fd;
@@ -51,11 +51,11 @@ index 664d0045..e1799411 100644
      Could error for any number of reasons, and they are not handled. */
      transport_write_message(&tctx, 0);
      fflush(f);
-diff --git a/src/smtp_out.c b/src/smtp_out.c
-index 9bd90c77..b194e804 100644
---- a/src/smtp_out.c
-+++ b/src/smtp_out.c
-@@ -688,20 +688,22 @@ Returns:    TRUE if a valid, non-error response was received; else FALSE
+Index: BUILD/src/smtp_out.c
+===================================================================
+--- BUILD.orig/src/smtp_out.c
++++ BUILD/src/smtp_out.c
+@@ -688,20 +688,22 @@ Returns:    TRUE if a valid, non-error r
  /*XXX could move to smtp transport; no other users */
  
  BOOL
@@ -82,11 +82,11 @@ index 9bd90c77..b194e804 100644
      return FALSE;
      }
  #endif
-diff --git a/src/tls-gnu.c b/src/tls-gnu.c
-index c404dc29..de2d70c0 100644
---- a/src/tls-gnu.c
-+++ b/src/tls-gnu.c
-@@ -229,7 +229,7 @@ static gnutls_dh_params_t dh_server_params = NULL;
+Index: BUILD/src/tls-gnu.c
+===================================================================
+--- BUILD.orig/src/tls-gnu.c
++++ BUILD/src/tls-gnu.c
+@@ -229,7 +229,7 @@ static gnutls_dh_params_t dh_server_para
  
  static const int ssl_session_timeout = 200;
  
@@ -103,7 +103,7 @@ index c404dc29..de2d70c0 100644
  
  if (!exim_gnutls_base_init_done)
    {
-@@ -1387,32 +1386,24 @@ and replaces gnutls_require_kx, gnutls_require_mac & gnutls_require_protocols.
+@@ -1387,32 +1386,24 @@ and replaces gnutls_require_kx, gnutls_r
  This was backwards incompatible, but means Exim no longer needs to track
  all algorithms and provide string forms for them. */
  
@@ -142,10 +142,10 @@ index c404dc29..de2d70c0 100644
  
  exim_gnutls_err_check(rc, string_sprintf(
        "gnutls_priority_init(%s) failed at offset %ld, \"%.6s..\"",
-diff --git a/src/transports/lmtp.c b/src/transports/lmtp.c
-index 240d78b2..57b346d4 100644
---- a/src/transports/lmtp.c
-+++ b/src/transports/lmtp.c
+Index: BUILD/src/transports/lmtp.c
+===================================================================
+--- BUILD.orig/src/transports/lmtp.c
++++ BUILD/src/transports/lmtp.c
 @@ -122,7 +122,8 @@ Arguments:
  Returns:       TRUE if a "QUIT" command should be sent, else FALSE
  */
@@ -156,10 +156,10 @@ index 240d78b2..57b346d4 100644
    int *yield, uschar **message)
  {
  *yield = '4';    /* Default setting is to give a temporary error */
-diff --git a/src/transports/smtp.c b/src/transports/smtp.c
-index a351da84..bfd6018d 100644
---- a/src/transports/smtp.c
-+++ b/src/transports/smtp.c
+Index: BUILD/src/transports/smtp.c
+===================================================================
+--- BUILD.orig/src/transports/smtp.c
++++ BUILD/src/transports/smtp.c
 @@ -594,6 +594,11 @@ switch(*errno_value)
  	  pl, smtp_command, s);
      return FALSE;
@@ -180,7 +180,7 @@ index a351da84..bfd6018d 100644
   FAIL	SMTP error in response
  */
  int
-@@ -949,6 +955,7 @@ smtp_reap_early_pipe(smtp_context * sx, int * countp)
+@@ -949,6 +955,7 @@ smtp_reap_early_pipe(smtp_context * sx,
  {
  BOOL pending_BANNER = sx->pending_BANNER;
  BOOL pending_EHLO = sx->pending_EHLO;
@@ -213,7 +213,7 @@ index a351da84..bfd6018d 100644
  }
  #endif
  
-@@ -1056,6 +1065,7 @@ Returns:      3 if at least one address had 2xx and one had 5xx
+@@ -1056,6 +1065,7 @@ Returns:      3 if at least one address
               -2 I/O or other non-response error for RCPT
               -3 DATA or MAIL failed - errno and buffer set
  	     -4 banner or EHLO failed (early-pipelining)
@@ -221,7 +221,7 @@ index a351da84..bfd6018d 100644
  */
  
  static int
-@@ -1064,10 +1074,11 @@ sync_responses(smtp_context * sx, int count, int pending_DATA)
+@@ -1064,10 +1074,11 @@ sync_responses(smtp_context * sx, int co
  address_item * addr = sx->sync_addr;
  smtp_transport_options_block * ob = sx->conn_args.ob;
  int yield = 0;
@@ -278,7 +278,7 @@ index a351da84..bfd6018d 100644
  */
  
  static int
-@@ -1859,10 +1883,12 @@ if (flags & tc_reap_prev  &&  prev_cmd_count > 0)
+@@ -1859,10 +1883,12 @@ if (flags & tc_reap_prev  &&  prev_cmd_c
      case 2: sx->completed_addr = TRUE;	/* 5xx (only) => progress made */
      case 0: break;			/* No 2xx or 5xx, but no probs */
  
@@ -366,7 +366,7 @@ index a351da84..bfd6018d 100644
      smtp_peer_options = 0;
      }
    }
-@@ -3261,6 +3305,7 @@ for (addr = sx->first_addr, address_count = 0;
+@@ -3261,6 +3305,7 @@ for (addr = sx->first_addr, address_coun
  
  #ifdef EXPERIMENTAL_PIPE_CONNECT
        case -4: return -1;			/* non-2xx for pipelined banner or EHLO */
@@ -374,7 +374,7 @@ index a351da84..bfd6018d 100644
  #endif
        }
      sx->pending_MAIL = FALSE;            /* Dealt with MAIL */
-@@ -3589,11 +3634,12 @@ if (  !(sx.peer_offered & OPTION_CHUNKING)
+@@ -3589,11 +3634,12 @@ if (  !(sx.peer_offered & OPTION_CHUNKIN
  
      case 1: sx.ok = TRUE;            /* 2xx (only) => OK, but if LMTP, */
      if (!sx.lmtp) sx.completed_addr = TRUE; /* can't tell about progress yet */
@@ -415,6 +415,3 @@ index a351da84..bfd6018d 100644
        }
      }
  
--- 
-2.20.1
-

@@ -9,9 +9,11 @@ Cherry-picked from: 52af443324, c77d3d85fe
  doc/ChangeLog     |  2 +-
  2 files changed, 11 insertions(+), 2 deletions(-)
 
---- a/doc/ChangeLog
-+++ b/doc/ChangeLog
-@@ -18,7 +18,7 @@ JH/07 GnuTLS: Our use of late (post-hand
+Index: BUILD/doc/ChangeLog
+===================================================================
+--- BUILD.orig/doc/ChangeLog
++++ BUILD/doc/ChangeLog
+@@ -24,7 +24,7 @@ JH/07 GnuTLS: Our use of late (post-hand
        TLS connection attempt, so that the normal retry-in-clear can work (if
        suitably configured).
  
@@ -20,8 +22,10 @@ Cherry-picked from: 52af443324, c77d3d85fe
        and/or domain.  Found and fixed by Jason Betts.
  
  
---- a/doc/spec.txt
-+++ b/doc/spec.txt
+Index: BUILD/doc/spec.txt
+===================================================================
+--- BUILD.orig/doc/spec.txt
++++ BUILD/doc/spec.txt
 @@ -6302,6 +6302,10 @@ The following single-key lookup types ar
      implicit key is the host's IP address rather than its name (see section
      10.12).

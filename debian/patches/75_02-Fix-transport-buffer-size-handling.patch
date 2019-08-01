@@ -9,12 +9,12 @@ Subject: [PATCH 3/7] Fix transport buffer size handling Broken-by: 59932f7dcd
  src/transport.c   | 4 ++--
  2 files changed, 9 insertions(+), 2 deletions(-)
 
-diff --git a/doc/ChangeLog b/doc/ChangeLog
-index 7da07ad4..66c8a7a1 100644
---- a/doc/ChangeLog
-+++ b/doc/ChangeLog
-@@ -5,6 +5,13 @@ affect Exim's operation, with an unchanged configuration file.  For new
- options, and new features, see the NewStuff file next to this ChangeLog.
+Index: BUILD/doc/ChangeLog
+===================================================================
+--- BUILD.orig/doc/ChangeLog
++++ BUILD/doc/ChangeLog
+@@ -11,6 +11,13 @@ Exim version 4.92.1
+ JH/31 Avoid re-expansion in ${sort } expansion. (CVE-2019-13917, OVE-20190718-0006)
  
  
 +Since version 4.92
@@ -27,10 +27,10 @@ index 7da07ad4..66c8a7a1 100644
  Exim version 4.92
  -----------------
  
-diff --git a/src/transport.c b/src/transport.c
-index 8ccdd038..a069b883 100644
---- a/src/transport.c
-+++ b/src/transport.c
+Index: BUILD/src/transport.c
+===================================================================
+--- BUILD.orig/src/transport.c
++++ BUILD/src/transport.c
 @@ -1115,13 +1115,13 @@ DEBUG(D_transport)
  
  if (!(tctx->options & topt_no_body))
@@ -47,6 +47,3 @@ index 8ccdd038..a069b883 100644
  	&& (len = read(deliver_datafile, deliver_in_buffer, len)) > 0)
      {
      if (!write_chunk(tctx, deliver_in_buffer, len))
--- 
-2.20.1
-
