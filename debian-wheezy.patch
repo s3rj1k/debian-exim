@@ -46,3 +46,14 @@ index 2dd57f9..3998d5f 100644
   libgnutls28-dev (>= 3.5.7) | libssl-dev,
   libident-dev,
   libpam0g-dev,
+diff --git debian/rules debian/rules
+index b314438..3287e45 100755
+--- debian/rules
++++ debian/rules
+@@ -52,7 +52,7 @@ PROVIDE_DEFAULT_MTA := $(shell if dpkg-vendor --is Ubuntu || \
+        echo "default-mta" ; fi)
+ # for reproducible build. If set exim would use $TZ as default value for
+ # TIMEZONE_DEFAULT
+-undefine TZ
++#undefine TZ
+ unexport TZ
