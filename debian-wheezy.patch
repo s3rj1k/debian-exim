@@ -5,9 +5,9 @@ index cbabce5..20a3c48 100644
 @@ -1,4 +1,4 @@
 -exim4 (4.92.1-99a) jessie; urgency=medium
 +exim4 (4.92.1-99a) wheezy; urgency=medium
- 
+
    * https://github.com/Exim/exim/blob/exim-4.92.1%2Bfixes/doc/doc-txt/ChangeLog
- 
+
 diff --git debian/changelog debian/changelog
 index cbabce5..20a3c48 100644
 --- debian/changelog
@@ -15,9 +15,9 @@ index cbabce5..20a3c48 100644
 @@ -1,4 +1,4 @@
 -exim4 (4.92.1-99a) jessie; urgency=medium
 +exim4 (4.92.1-99a) wheezy; urgency=medium
- 
+
    * https://github.com/Exim/exim/blob/exim-4.92.1%2Bfixes/doc/doc-txt/ChangeLog
- 
+
 diff --git debian/compat debian/compat
 index ec63514..7f8f011 100644
 --- debian/compat
