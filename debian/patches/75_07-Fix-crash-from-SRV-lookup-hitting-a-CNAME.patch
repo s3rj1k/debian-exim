@@ -9,13 +9,11 @@ Subject: [PATCH 3/5] Fix crash from SRV lookup hitting a CNAME
  src/dns.c         | 10 +++++++---
  2 files changed, 11 insertions(+), 3 deletions(-)
 
-diff --git a/doc/ChangeLog b/doc/ChangeLog
-index 419c1061..0f8d05b2 100644
---- a/doc/ChangeLog
-+++ b/doc/ChangeLog
-@@ -19,10 +19,14 @@ JH/07 GnuTLS: Our use of late (post-handshake) certificate verification, under
-       suitably configured).
- 
+Index: BUILD/doc/ChangeLog
+===================================================================
+--- BUILD.orig/doc/ChangeLog
++++ BUILD/doc/ChangeLog
+@@ -27,6 +27,10 @@ JH/07 GnuTLS: Our use of late (post-hand
  JB/01 Bug 2375: fix expansions of 822 addresses having comments in local-part
        and/or domain.  Found and fixed by Jason Betts.
  
@@ -26,15 +24,11 @@ index 419c1061..0f8d05b2 100644
  
  Exim version 4.92
  -----------------
- 
- JH/01 Remove code calling the customisable local_scan function, unless a new
-diff --git a/src/dns.c b/src/dns.c
-index 0f0b435d..b7978c52 100644
---- a/src/dns.c
-+++ b/src/dns.c
-@@ -714,11 +714,15 @@ regex has substrings that are used - the default uses a conditional.
- This test is omitted for PTR records. These occur only in calls from the dnsdb
- lookup, which constructs the names itself, so they should be OK. Besides,
+Index: BUILD/src/dns.c
+===================================================================
+--- BUILD.orig/src/dns.c
++++ BUILD/src/dns.c
+@@ -716,7 +716,11 @@ lookup, which constructs the names itsel
  bitstring labels don't conform to normal name syntax. (But the aren't used any
  more.)
  
@@ -47,11 +41,7 @@ index 0f0b435d..b7978c52 100644
  
  #ifndef STAND_ALONE   /* Omit this for stand-alone tests */
  
- if (check_dns_names_pattern[0] != 0 && type != T_PTR && type != T_TXT)
-   {
-@@ -730,12 +734,12 @@ if (check_dns_names_pattern[0] != 0 && type != T_PTR && type != T_TXT)
-   /* For an SRV lookup, skip over the first two components (the service and
-   protocol names, which both start with an underscore). */
+@@ -732,8 +736,8 @@ if (check_dns_names_pattern[0] != 0 && t
  
    if (type == T_SRV || type == T_TLSA)
      {
@@ -62,8 +52,3 @@ index 0f0b435d..b7978c52 100644
      }
  
    if (pcre_exec(regex_check_dns_names, NULL, CCS checkname, Ustrlen(checkname),
-       0, PCRE_EOPT, ovector, nelem(ovector)) < 0)
-     {
--- 
-2.20.1
-

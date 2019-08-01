@@ -14,13 +14,11 @@ Broken-by: a5ffa9b475
  create mode 100644 test/confs/2152
  create mode 100644 test/log/2152
 
-diff --git a/doc/ChangeLog b/doc/ChangeLog
-index 3c0ffbf0..3d63725f 100644
---- a/doc/ChangeLog
-+++ b/doc/ChangeLog
-@@ -26,10 +26,15 @@ JH/08 Add hardening against SRV & TLSA lookups the hit CNAMEs (a nonvalid
-       crash could result.
- 
+Index: BUILD/doc/ChangeLog
+===================================================================
+--- BUILD.orig/doc/ChangeLog
++++ BUILD/doc/ChangeLog
+@@ -34,6 +34,11 @@ JH/08 Add hardening against SRV & TLSA l
  JH/09 Logging: Fix initial listening-on line for multiple ports for an IP when
        the OS reports them interleaved with other addresses.
  
@@ -32,15 +30,11 @@ index 3c0ffbf0..3d63725f 100644
  
  
  Exim version 4.92
- -----------------
- 
-diff --git a/src/tls-openssl.c b/src/tls-openssl.c
-index 8f4cf4d8..cc0ead02 100644
---- a/src/tls-openssl.c
-+++ b/src/tls-openssl.c
-@@ -272,10 +272,11 @@ Server:
- */
- 
+Index: BUILD/src/tls-openssl.c
+===================================================================
+--- BUILD.orig/src/tls-openssl.c
++++ BUILD/src/tls-openssl.c
+@@ -274,6 +274,7 @@ Server:
  typedef struct {
    SSL_CTX *	ctx;
    SSL *		ssl;
@@ -48,11 +42,7 @@ index 8f4cf4d8..cc0ead02 100644
  } exim_openssl_client_tls_ctx;
  
  static SSL_CTX *server_ctx = NULL;
- static SSL     *server_ssl = NULL;
- 
-@@ -2471,10 +2472,11 @@ BOOL require_ocsp = FALSE;
- #endif
- 
+@@ -2473,6 +2474,7 @@ BOOL require_ocsp = FALSE;
  rc = store_pool;
  store_pool = POOL_PERM;
  exim_client_ctx = store_get(sizeof(exim_openssl_client_tls_ctx));
@@ -60,11 +50,7 @@ index 8f4cf4d8..cc0ead02 100644
  store_pool = rc;
  
  #ifdef SUPPORT_DANE
- tlsp->tlsa_usage = 0;
- #endif
-@@ -2906,22 +2908,29 @@ Used by both server-side and client-side TLS.
- 
- int
+@@ -2908,8 +2910,12 @@ int
  tls_write(void * ct_ctx, const uschar *buff, size_t len, BOOL more)
  {
  int outbytes, error, left;
@@ -79,7 +65,7 @@ index 8f4cf4d8..cc0ead02 100644
  
  DEBUG(D_tls) debug_printf("%s(%p, %lu%s)\n", __FUNCTION__,
    buff, (unsigned long)len, more ? ", more" : "");
- 
+@@ -2917,9 +2923,12 @@ DEBUG(D_tls) debug_printf("%s(%p, %lu%s)
  /* Lacking a CORK or MSG_MORE facility (such as GnuTLS has) we copy data when
  "more" is notified.  This hack is only ok if small amounts are involved AND only
  one stream does it, in one context (i.e. no store reset).  Currently it is used
@@ -95,11 +81,7 @@ index 8f4cf4d8..cc0ead02 100644
  
  if (!ct_ctx && (more || corked))
    {
- #ifdef EXPERIMENTAL_PIPE_CONNECT
-   int save_pool = store_pool;
-@@ -2933,14 +2942,17 @@ if (!ct_ctx && (more || corked))
- #ifdef EXPERIMENTAL_PIPE_CONNECT
-   store_pool = save_pool;
+@@ -2935,10 +2944,13 @@ if (!ct_ctx && (more || corked))
  #endif
  
    if (more)
@@ -114,14 +96,3 @@ index 8f4cf4d8..cc0ead02 100644
    }
  
  for (left = len; left > 0;)
-   {
-   DEBUG(D_tls) debug_printf("SSL_write(%p, %p, %d)\n", ssl, buff, left);
-diff --git a/test/confs/2152 b/test/confs/2152
-new file mode 100644
-index 00000000..f783192b
-diff --git a/test/log/2152 b/test/log/2152
-new file mode 100644
-index 00000000..720200be
--- 
-2.20.1
-

@@ -13,13 +13,11 @@ Subject: [PATCH 4/5] Logging: fix initial listening-on log line
  test/log/0282         |  2 +-
  6 files changed, 54 insertions(+), 29 deletions(-)
 
-diff --git a/doc/ChangeLog b/doc/ChangeLog
-index 0f8d05b2..3c0ffbf0 100644
---- a/doc/ChangeLog
-+++ b/doc/ChangeLog
-@@ -23,10 +23,14 @@ JB/01 Bug 2375: fix expansions of 822 addresses having comments in local-part
- 
- JH/08 Add hardening against SRV & TLSA lookups the hit CNAMEs (a nonvalid
+Index: BUILD/doc/ChangeLog
+===================================================================
+--- BUILD.orig/doc/ChangeLog
++++ BUILD/doc/ChangeLog
+@@ -31,6 +31,10 @@ JH/08 Add hardening against SRV & TLSA l
        configuration).  If a CNAME target was not a wellformed name pattern, a
        crash could result.
  
@@ -30,15 +28,11 @@ index 0f8d05b2..3c0ffbf0 100644
  
  Exim version 4.92
  -----------------
- 
- JH/01 Remove code calling the customisable local_scan function, unless a new
-diff --git a/src/daemon.c b/src/daemon.c
-index a852192e..01da3936 100644
---- a/src/daemon.c
-+++ b/src/daemon.c
-@@ -1625,12 +1625,12 @@ if (f.inetd_wait_mode)
- else if (f.daemon_listen)
-   {
+Index: BUILD/src/daemon.c
+===================================================================
+--- BUILD.orig/src/daemon.c
++++ BUILD/src/daemon.c
+@@ -1627,8 +1627,8 @@ else if (f.daemon_listen)
    int i, j;
    int smtp_ports = 0;
    int smtps_ports = 0;
@@ -49,11 +43,7 @@ index a852192e..01da3936 100644
    uschar * qinfo = queue_interval > 0
      ? string_sprintf("-q%s", readconf_printtime(queue_interval))
      : US"no queue runs";
- 
-   /* Build a list of listening addresses in big_buffer, but limit it to 10
-@@ -1638,73 +1638,92 @@ else if (f.daemon_listen)
- 
-   It is now possible to have some ports listening for SMTPS (the old,
+@@ -1640,27 +1640,19 @@ else if (f.daemon_listen)
    deprecated protocol that starts TLS without using STARTTLS), and others
    listening for standard SMTP. Keep their listings separate. */
  
@@ -85,8 +75,7 @@ index a852192e..01da3936 100644
  
  	/* Now the information about the port (and sometimes interface) */
  
- 	if (ipa->address[0] == ':' && ipa->address[1] == 0)
- 	  {						/* v6 wildcard */
+@@ -1669,40 +1661,67 @@ else if (f.daemon_listen)
  	  if (ipa->next && ipa->next->address[0] == 0 &&
  	      ipa->next->port == ipa->port)
  	    {
@@ -167,15 +156,11 @@ index a852192e..01da3936 100644
      }
  
    log_write(0, LOG_MAIN,
-     "exim %s daemon started: pid=%d, %s, listening for %s",
-     version_string, getpid(), qinfo, big_buffer);
-diff --git a/src/host.c b/src/host.c
-index 29c977fe..a3b0977b 100644
---- a/src/host.c
-+++ b/src/host.c
-@@ -757,10 +757,11 @@ while ((s = string_nextinlist(&list, &sep, NULL, 0)))
-   next = store_get(sizeof(ip_address_item));
-   next->next = NULL;
+Index: BUILD/src/host.c
+===================================================================
+--- BUILD.orig/src/host.c
++++ BUILD/src/host.c
+@@ -759,6 +759,7 @@ while ((s = string_nextinlist(&list, &se
    Ustrcpy(next->address, s);
    next->port = port;
    next->v6_include_v4 = FALSE;
@@ -183,15 +168,11 @@ index 29c977fe..a3b0977b 100644
  
    if (!yield)
      yield = last = next;
-   else
-     {
-diff --git a/src/structs.h b/src/structs.h
-index 20db0e5f..1e63d752 100644
---- a/src/structs.h
-+++ b/src/structs.h
-@@ -442,10 +442,11 @@ hold an IPv6 address. */
- typedef struct ip_address_item {
-   struct ip_address_item *next;
+Index: BUILD/src/structs.h
+===================================================================
+--- BUILD.orig/src/structs.h
++++ BUILD/src/structs.h
+@@ -444,6 +444,7 @@ typedef struct ip_address_item {
    int    port;
    BOOL   v6_include_v4;            /* Used in the daemon */
    uschar address[46];
@@ -199,8 +180,3 @@ index 20db0e5f..1e63d752 100644
  } ip_address_item;
  
  /* Structure for chaining together arbitrary strings. */
- 
- typedef struct string_item {
--- 
-2.20.1
-

@@ -12,13 +12,11 @@ Subject: [PATCH 1/5] Fix expansions for RFC 822 addresses having comments in
  test/stdout/0002             |  7 +++++++
  4 files changed, 24 insertions(+), 12 deletions(-)
 
-diff --git a/doc/ChangeLog b/doc/ChangeLog
-index 867a1d8a..9659da32 100644
---- a/doc/ChangeLog
-+++ b/doc/ChangeLog
-@@ -16,10 +16,13 @@ JH/07 GnuTLS: Our use of late (post-handshake) certificate verification, under
-       to the client until the first read of encrypted data (typically the
-       response to EHLO).  Add detection for that case and treat it as a failed
+Index: BUILD/doc/ChangeLog
+===================================================================
+--- BUILD.orig/doc/ChangeLog
++++ BUILD/doc/ChangeLog
+@@ -24,6 +24,9 @@ JH/07 GnuTLS: Our use of late (post-hand
        TLS connection attempt, so that the normal retry-in-clear can work (if
        suitably configured).
  
@@ -28,15 +26,11 @@ index 867a1d8a..9659da32 100644
  
  Exim version 4.92
  -----------------
- 
- JH/01 Remove code calling the customisable local_scan function, unless a new
-diff --git a/src/expand.c b/src/expand.c
-index 2c290251..35ede718 100644
---- a/src/expand.c
-+++ b/src/expand.c
-@@ -7071,20 +7071,15 @@ while (*s != 0)
-         uschar * error;
-         int start, end, domain;
+Index: BUILD/src/expand.c
+===================================================================
+--- BUILD.orig/src/expand.c
++++ BUILD/src/expand.c
+@@ -7151,16 +7151,11 @@ while (*s != 0)
          uschar * t = parse_extract_address(sub, &error, &start, &end, &domain,
            FALSE);
          if (t)
@@ -58,11 +52,7 @@ index 2c290251..35ede718 100644
          continue;
          }
  
-       case EOP_ADDRESSES:
-         {
-@@ -7104,11 +7099,11 @@ while (*s != 0)
-             }
-         f.parse_allow_group = TRUE;
+@@ -7184,7 +7179,7 @@ while (*s != 0)
  
          for (;;)
            {
@@ -71,11 +61,7 @@ index 2c290251..35ede718 100644
            uschar saveend = *p;
            *p = '\0';
            address = parse_extract_address(sub, &error, &start, &end, &domain,
-             FALSE);
-           *p = saveend;
-@@ -7117,11 +7112,11 @@ while (*s != 0)
-           done in chunks by searching for the separator character. At the
-           start, unless we are dealing with the first address of the output
+@@ -7197,7 +7192,7 @@ while (*s != 0)
            list, add in a space if the new address begins with the separator
            character, or is an empty string. */
  
@@ -84,8 +70,3 @@ index 2c290251..35ede718 100644
              {
              if (yield->ptr != save_ptr && address[0] == *outsep)
                yield = string_catn(yield, US" ", 1);
- 
-             for (;;)
--- 
-2.20.1
-

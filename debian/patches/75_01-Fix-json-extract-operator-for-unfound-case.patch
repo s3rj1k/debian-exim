@@ -11,27 +11,11 @@ Subject: [PATCH 1/7] Fix json extract operator for unfound case
  test/stdout/0002             |  3 +++
  4 files changed, 18 insertions(+), 5 deletions(-)
 
---- a/src/expand.c
-+++ b/src/expand.c
-@@ -3901,7 +3901,8 @@ return NULL;
- /* Pull off the leading array or object element, returning
- a copy in an allocated string.  Update the list pointer.
- 
--The element may itself be an abject or array.
-+The element may itself be an object or array.
-+Return NULL when the list is empty.
- */
- 
- uschar *
-@@ -3923,6 +3924,7 @@ for (item = s;
-     case '}': object_depth--; break;
-     }
- *list = *s ? s+1 : s;
-+if (item == s) return NULL;
- item = string_copyn(item, s - item);
- DEBUG(D_expand) debug_printf_indent("  json ele: '%s'\n", item);
- return US item;
-@@ -5790,10 +5792,11 @@ while (*s != 0)
+Index: BUILD/src/expand.c
+===================================================================
+--- BUILD.orig/src/expand.c
++++ BUILD/src/expand.c
+@@ -5861,10 +5861,11 @@ while (*s != 0)
  	      }
  	    while (field_number > 0 && (item = json_nextinlist(&list)))
  	      field_number--;
@@ -47,8 +31,10 @@ Subject: [PATCH 1/7] Fix json extract operator for unfound case
  	    }
  	  else
  	    {
---- a/doc/spec.txt
-+++ b/doc/spec.txt
+Index: BUILD/doc/spec.txt
+===================================================================
+--- BUILD.orig/doc/spec.txt
++++ BUILD/doc/spec.txt
 @@ -8776,6 +8776,8 @@ ${extract json{<key>}{<string1>}{<string
      The braces, commas and colons, and the quoting of the member name are
      required; the spaces are optional. Matching of the key against the member

@@ -1,23 +1,23 @@
 diff --git debian/NEWS debian/NEWS
-index cff13c5..4781c55 100644
+index cbabce5..20a3c48 100644
 --- debian/NEWS
 +++ debian/NEWS
 @@ -1,4 +1,4 @@
--exim4 (4.92-7a) jessie; urgency=medium
-+exim4 (4.92-7a) wheezy; urgency=medium
-
-   * https://github.com/Exim/exim/blob/exim-4.92%2Bfixes/doc/doc-txt/ChangeLog
-
+-exim4 (4.92.1-99a) jessie; urgency=medium
++exim4 (4.92.1-99a) wheezy; urgency=medium
+ 
+   * https://github.com/Exim/exim/blob/exim-4.92.1%2Bfixes/doc/doc-txt/ChangeLog
+ 
 diff --git debian/changelog debian/changelog
-index cff13c5..4781c55 100644
+index cbabce5..20a3c48 100644
 --- debian/changelog
 +++ debian/changelog
 @@ -1,4 +1,4 @@
--exim4 (4.92-7a) jessie; urgency=medium
-+exim4 (4.92-7a) wheezy; urgency=medium
-
-   * https://github.com/Exim/exim/blob/exim-4.92%2Bfixes/doc/doc-txt/ChangeLog
-
+-exim4 (4.92.1-99a) jessie; urgency=medium
++exim4 (4.92.1-99a) wheezy; urgency=medium
+ 
+   * https://github.com/Exim/exim/blob/exim-4.92.1%2Bfixes/doc/doc-txt/ChangeLog
+ 
 diff --git debian/compat debian/compat
 index ec63514..7f8f011 100644
 --- debian/compat
@@ -32,7 +32,7 @@ index 2dd57f9..3998d5f 100644
 @@ -3,13 +3,13 @@ Section: mail
  Priority: standard
  Maintainer: s3rj1k <evasive.gyron@gmail.com>
-  Homepage: https://www.exim.org/
+ Homepage: https://www.exim.org/
 -Standards-Version: 3.9.8
 +Standards-Version: 3.9.3
  Build-Depends:
