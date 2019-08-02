@@ -53,5 +53,5 @@ tls_privatekey = REMOTE_SMTP_PRIVATEKEY
 .endif
 .ifndef REMOTE_SMTP_DISABLE_DANE
 dnssec_request_domains = *
-hosts_try_dane = *
+SUPPORT_DANE = *
 .endif
