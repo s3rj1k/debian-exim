@@ -1,0 +1,20 @@
+diff --git a/debian/NEWS b/debian/NEWS
+index cbabce5..292b92c 100644
+--- a/debian/NEWS
++++ b/debian/NEWS
+@@ -1,4 +1,4 @@
+-exim4 (4.92.1-99a) jessie; urgency=medium
++exim4 (4.92.1-99a) stretch; urgency=medium
+ 
+   * https://github.com/Exim/exim/blob/exim-4.92.1%2Bfixes/doc/doc-txt/ChangeLog
+ 
+diff --git a/debian/changelog b/debian/changelog
+index cbabce5..292b92c 100644
+--- a/debian/changelog
++++ b/debian/changelog
+@@ -1,4 +1,4 @@
+-exim4 (4.92.1-99a) jessie; urgency=medium
++exim4 (4.92.1-99a) stretch; urgency=medium
+ 
+   * https://github.com/Exim/exim/blob/exim-4.92.1%2Bfixes/doc/doc-txt/ChangeLog
+ 
