@@ -1,6 +1,6 @@
 # debian-exim
 
-This repository provides exim4 debianized source package for Debian 8.x.
+This repository provides exim4 debianized source package for Debian.
 
 ## build dependencies:
 
@@ -29,4 +29,16 @@ wget --no-check-certificate -qO- https://ftp.exim.org/pub/exim/exim4/exim-4.92.1
 
 ```
 debuild --no-tgz-check -i -us -uc -b
+```
+
+## create patch
+
+```
+git diff > patch.diff
+```
+
+## apply patch
+
+```
+patch -p1 < patch.diff
 ```

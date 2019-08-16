@@ -1,34 +1,34 @@
-diff --git debian/NEWS debian/NEWS
+diff --git a/debian/NEWS b/debian/NEWS
 index cbabce5..20a3c48 100644
---- debian/NEWS
-+++ debian/NEWS
+--- a/debian/NEWS
++++ b/debian/NEWS
 @@ -1,4 +1,4 @@
 -exim4 (4.92.1-99a) jessie; urgency=medium
 +exim4 (4.92.1-99a) wheezy; urgency=medium
 
    * https://github.com/Exim/exim/blob/exim-4.92.1%2Bfixes/doc/doc-txt/ChangeLog
 
-diff --git debian/changelog debian/changelog
+diff --git a/debian/changelog b/debian/changelog
 index cbabce5..20a3c48 100644
---- debian/changelog
-+++ debian/changelog
+--- a/debian/changelog
++++ b/debian/changelog
 @@ -1,4 +1,4 @@
 -exim4 (4.92.1-99a) jessie; urgency=medium
 +exim4 (4.92.1-99a) wheezy; urgency=medium
 
    * https://github.com/Exim/exim/blob/exim-4.92.1%2Bfixes/doc/doc-txt/ChangeLog
 
-diff --git debian/compat debian/compat
+diff --git a/debian/compat b/debian/compat
 index ec63514..7f8f011 100644
---- debian/compat
-+++ debian/compat
+--- a/debian/compat
++++ b/debian/compat
 @@ -1 +1 @@
 -9
 +7
-diff --git debian/control debian/control
+diff --git a/debian/control b/debian/control
 index 2dd57f9..3998d5f 100644
---- debian/control
-+++ debian/control
+--- a/debian/control
++++ b/debian/control
 @@ -3,13 +3,13 @@ Section: mail
  Priority: standard
  Maintainer: s3rj1k <evasive.gyron@gmail.com>
@@ -46,14 +46,16 @@ index 2dd57f9..3998d5f 100644
   libgnutls28-dev (>= 3.5.7) | libssl-dev,
   libident-dev,
   libpam0g-dev,
-diff --git debian/rules debian/rules
+diff --git a/debian/rules b/debian/rules
 index b314438..3287e45 100755
---- debian/rules
-+++ debian/rules
+--- a/debian/rules
++++ b/debian/rules
 @@ -52,7 +52,7 @@ PROVIDE_DEFAULT_MTA := $(shell if dpkg-vendor --is Ubuntu || \
-        echo "default-mta" ; fi)
+ 	echo "default-mta" ; fi)
  # for reproducible build. If set exim would use $TZ as default value for
  # TIMEZONE_DEFAULT
 -undefine TZ
 +#undefine TZ
  unexport TZ
+
+
