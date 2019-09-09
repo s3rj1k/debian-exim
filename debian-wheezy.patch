@@ -1,23 +1,37 @@
 diff --git a/debian/NEWS b/debian/NEWS
-index cbabce5..20a3c48 100644
+index 91a6dc3..0c2e988 100644
 --- a/debian/NEWS
 +++ b/debian/NEWS
-@@ -1,4 +1,4 @@
+@@ -1,10 +1,10 @@
+-exim4 (4.92.2-99a) jessie; urgency=medium
++exim4 (4.92.2-99a) wheezy; urgency=medium
+ 
+   * https://github.com/Exim/exim/blob/exim-4.92.2%2Bfixes/doc/doc-txt/ChangeLog
+ 
+  -- kaut <maksimkaut92@gmail.com>  Mon, 9 Aug 2019 12:00:00 +0100
+ 
 -exim4 (4.92.1-99a) jessie; urgency=medium
 +exim4 (4.92.1-99a) wheezy; urgency=medium
-
+ 
    * https://github.com/Exim/exim/blob/exim-4.92.1%2Bfixes/doc/doc-txt/ChangeLog
-
+ 
 diff --git a/debian/changelog b/debian/changelog
-index cbabce5..20a3c48 100644
+index 91a6dc3..0c2e988 100644
 --- a/debian/changelog
 +++ b/debian/changelog
-@@ -1,4 +1,4 @@
+@@ -1,10 +1,10 @@
+-exim4 (4.92.2-99a) jessie; urgency=medium
++exim4 (4.92.2-99a) wheezy; urgency=medium
+ 
+   * https://github.com/Exim/exim/blob/exim-4.92.2%2Bfixes/doc/doc-txt/ChangeLog
+ 
+  -- kaut <maksimkaut92@gmail.com>  Mon, 9 Aug 2019 12:00:00 +0100
+ 
 -exim4 (4.92.1-99a) jessie; urgency=medium
 +exim4 (4.92.1-99a) wheezy; urgency=medium
-
+ 
    * https://github.com/Exim/exim/blob/exim-4.92.1%2Bfixes/doc/doc-txt/ChangeLog
-
+ 
 diff --git a/debian/compat b/debian/compat
 index ec63514..7f8f011 100644
 --- a/debian/compat
