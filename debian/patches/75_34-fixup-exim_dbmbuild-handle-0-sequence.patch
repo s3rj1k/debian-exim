@@ -1,0 +1,26 @@
+From cdc7f9a9667ecf31d803fc8d1a31b466284360bd Mon Sep 17 00:00:00 2001
+From: "Heiko Schlittermann (HS12-RIPE)" <hs@schlittermann.de>
+Date: Fri, 6 Sep 2019 06:57:11 +0200
+Subject: [PATCH 34/34] fixup! exim_dbmbuild: handle { '\\', '\0' } sequence.
+
+Credits to Qualys for double checking and reporting.
+---
+ src/exim_dbmbuild.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/exim_dbmbuild.c b/src/exim_dbmbuild.c
+index d7e611abf..63fd691a8 100644
+--- a/src/exim_dbmbuild.c
++++ b/src/exim_dbmbuild.c
+@@ -94,7 +94,7 @@ string_interpret_escape(const uschar **pp)
+ int ch;
+ const uschar *p = *pp;
+ ch = *(++p);
+-if (ch == '\0') return *pp;
++if (ch == '\0') return **pp;
+ if (isdigit(ch) && ch != '8' && ch != '9')
+   {
+   ch -= '0';
+-- 
+2.23.0.rc1
+
