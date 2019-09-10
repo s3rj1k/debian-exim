@@ -1,0 +1,39 @@
+From deda0b271ccd27ae76bd69ad1c1d0ef73e20091d Mon Sep 17 00:00:00 2001
+From: Jeremy Harris <jgh146exb@wizmail.org>
+Date: Tue, 27 Aug 2019 17:44:52 +0100
+Subject: [PATCH 32/34] Fix ${domain:} for a bare local-part input.  Bug 2375
+
+Broken-by: cebd5bd2ab
+(cherry picked from commit c5b0340697326238b0e2afd9d341185077d60d35)
+(cherry picked from commit 92b922fae5bbd5a70da4c5aa2f43a457842c30eb)
+---
+ src/expand.c             | 11 ++++++-----
+ test/scripts/0000-Basic/0002 |  2 ++
+ test/stdout/0002             |  2 ++
+ 3 files changed, 10 insertions(+), 5 deletions(-)
+
+diff --git a/src/expand.c b/src/expand.c
+index fbb2dfb14..0a8c5fbc0 100644
+--- a/src/expand.c
++++ b/src/expand.c
+@@ -7151,11 +7151,12 @@ while (*s != 0)
+         uschar * t = parse_extract_address(sub, &error, &start, &end, &domain,
+           FALSE);
+         if (t)
+-	  yield = c == EOP_DOMAIN
+-	    ? string_cat(yield, t + domain)
+-	    : c == EOP_LOCAL_PART && domain > 0
+-	    ? string_catn(yield, t, domain - 1 )
+-	    : string_cat(yield, t);
++	  if (c != EOP_DOMAIN)
++	    yield = c == EOP_LOCAL_PART && domain > 0
++	      ? string_catn(yield, t, domain - 1)
++	      : string_cat(yield, t);
++	  else if (domain > 0)
++	    yield = string_cat(yield, t + domain);
+         continue;
+         }
+ 
+-- 
+2.23.0.rc1
+

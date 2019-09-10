@@ -1,0 +1,30 @@
+From 2ac2eff3c9914a9c77b03db64b31819f361576b9 Mon Sep 17 00:00:00 2001
+From: Bruce Lee <straightblast426@gmail.com>
+Date: Tue, 30 Jul 2019 22:43:14 +0100
+Subject: [PATCH 31/34] Auth: handle socket read errors in Dovecot
+ authenticator
+
+(cherry picked from commit c9f1be94cc304f0343c93b66efa41a747d307fb1)
+(cherry picked from commit 4ba26a040b8765dea7134c883d046418a8b053a1)
+---
+ src/auths/dovecot.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/auths/dovecot.c b/src/auths/dovecot.c
+index b1dde06af..b1c2c6f85 100644
+--- a/src/auths/dovecot.c
++++ b/src/auths/dovecot.c
+@@ -212,8 +212,8 @@ for (;;)
+   {
+   if (socket_buffer_left == 0)
+     {
+-    socket_buffer_left = read(fd, sbuffer, sizeof(sbuffer));
+-    if (socket_buffer_left == 0) { if (count == 0) return NULL; else break; }
++    if ((socket_buffer_left = read(fd, sbuffer, sizeof(sbuffer))) <= 0)
++      if (count == 0) return NULL; else break;
+     p = 0;
+     }
+ 
+-- 
+2.23.0.rc1
+

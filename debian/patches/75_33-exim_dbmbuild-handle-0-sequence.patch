@@ -1,0 +1,29 @@
+From 66935633816a88460f5222f40dc29d1a4e877978 Mon Sep 17 00:00:00 2001
+From: "Heiko Schlittermann (HS12-RIPE)" <hs@schlittermann.de>
+Date: Thu, 5 Sep 2019 14:56:22 +0200
+Subject: [PATCH 33/34] exim_dbmbuild: handle { '\\', '\0' } sequence.
+
+This fix matches the change introduced for CVE-2019-15846, but
+isn't considered as a security issue, exim_dbmbuild is not designed to
+to run on untrusted data.
+
+Thanks to Thomas Hoger (RedHat) for pointing out.
+---
+ src/exim_dbmbuild.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/exim_dbmbuild.c b/src/exim_dbmbuild.c
+index afd5095db..d7e611abf 100644
+--- a/src/exim_dbmbuild.c
++++ b/src/exim_dbmbuild.c
+@@ -94,6 +94,7 @@ string_interpret_escape(const uschar **pp)
+ int ch;
+ const uschar *p = *pp;
+ ch = *(++p);
++if (ch == '\0') return *pp;
+ if (isdigit(ch) && ch != '8' && ch != '9')
+   {
+   ch -= '0';
+-- 
+2.23.0.rc1
+
