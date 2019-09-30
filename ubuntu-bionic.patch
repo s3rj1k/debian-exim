@@ -1,8 +1,15 @@
 diff --git a/debian/NEWS b/debian/NEWS
-index 91a6dc3..4bde855 100644
+index 95fabc8..a88aaab 100644
 --- a/debian/NEWS
 +++ b/debian/NEWS
-@@ -1,10 +1,10 @@
+@@ -1,16 +1,16 @@
+-exim4 (4.92.3-99a) jessie; urgency=medium
++exim4 (4.92.3-99a) bionic; urgency=medium
+ 
+   * https://github.com/Exim/exim/blob/exim-4.92.3%2Bfixes/doc/doc-txt/ChangeLog
+ 
+  -- s3rj1k <evasive.gyron@gmail.com>  Mon, 30 Sep 2019 09:00:00 +0200
+ 
 -exim4 (4.92.2-99a) jessie; urgency=medium
 +exim4 (4.92.2-99a) bionic; urgency=medium
  
@@ -16,10 +23,17 @@ index 91a6dc3..4bde855 100644
    * https://github.com/Exim/exim/blob/exim-4.92.1%2Bfixes/doc/doc-txt/ChangeLog
  
 diff --git a/debian/changelog b/debian/changelog
-index 91a6dc3..4bde855 100644
+index 95fabc8..a88aaab 100644
 --- a/debian/changelog
 +++ b/debian/changelog
-@@ -1,10 +1,10 @@
+@@ -1,16 +1,16 @@
+-exim4 (4.92.3-99a) jessie; urgency=medium
++exim4 (4.92.3-99a) bionic; urgency=medium
+ 
+   * https://github.com/Exim/exim/blob/exim-4.92.3%2Bfixes/doc/doc-txt/ChangeLog
+ 
+  -- s3rj1k <evasive.gyron@gmail.com>  Mon, 30 Sep 2019 09:00:00 +0200
+ 
 -exim4 (4.92.2-99a) jessie; urgency=medium
 +exim4 (4.92.2-99a) bionic; urgency=medium
  

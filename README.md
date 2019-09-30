@@ -22,7 +22,7 @@ wget --no-check-certificate -qO- https://github.com/s3rj1k/debian-exim/archive/m
 ## get exim4 sources:
 
 ```
-wget --no-check-certificate -qO- https://ftp.exim.org/pub/exim/exim4/exim-4.92.2.tar.gz | tar -xvz --strip=1 --exclude='.gitignore' --exclude='.gitattributes' --exclude='.ctags' -C .
+wget --no-check-certificate -qO- https://ftp.exim.org/pub/exim/exim4/exim-4.92.3.tar.gz | tar -xvz --strip=1 --exclude='.gitignore' --exclude='.gitattributes' --exclude='.ctags' -C .
 ```
 
 ## build
