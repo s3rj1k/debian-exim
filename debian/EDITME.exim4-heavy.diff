@@ -1,6 +1,6 @@
---- EDITME.ORIG	2019-06-11 13:36:49.804151020 +0300
-+++ EDITME	2019-06-11 13:37:06.028325237 +0300
-@@ -217,7 +217,7 @@
+--- EDITME.ORIG 2020-05-30 20:35:38.000000000 +0000
++++ EDITME      2020-08-12 14:56:33.739439295 +0000
+@@ -317,7 +317,7 @@
  
  # This one is very special-purpose, so is not included by default.
  
@@ -9,7 +9,7 @@
  
  
  #------------------------------------------------------------------------------
-@@ -249,7 +249,7 @@
+@@ -349,7 +349,7 @@
  
  SUPPORT_MAILDIR=yes
  SUPPORT_MAILSTORE=yes
@@ -18,17 +18,16 @@
  
  
  #------------------------------------------------------------------------------
-@@ -311,15 +311,15 @@
- LOOKUP_DSEARCH=yes
+@@ -412,7 +412,7 @@
  # LOOKUP_IBASE=yes
+ # LOOKUP_JSON=yes
  # LOOKUP_LDAP=yes
 -# LOOKUP_MYSQL=yes
 +LOOKUP_MYSQL=yes
  # LOOKUP_MYSQL_PC=mariadb
--LOOKUP_NIS=yes
-+# LOOKUP_NIS=yes
+ LOOKUP_NIS=yes
  # LOOKUP_NISPLUS=yes
- # LOOKUP_ORACLE=yes
+@@ -420,7 +420,7 @@
  LOOKUP_PASSWD=yes
  # LOOKUP_PGSQL=yes
  # LOOKUP_REDIS=yes
@@ -37,7 +36,7 @@
  # LOOKUP_SQLITE_PC=sqlite3
  # LOOKUP_WHOSON=yes
  
-@@ -385,6 +385,9 @@
+@@ -491,6 +491,9 @@
  # LOOKUP_LIBS=-L/usr/local/lib -lldap -llber -lmysqlclient -lpq -lgds -lsqlite3
  
  
@@ -47,7 +46,7 @@
  #------------------------------------------------------------------------------
  # Compiling the Exim monitor: If you want to compile the Exim monitor, a
  # program that requires an X11 display, then EXIM_MONITOR should be set to the
-@@ -393,7 +396,7 @@
+@@ -500,7 +503,7 @@
  # files are defaulted in the OS/Makefile-Default file, but can be overridden in
  # local OS-specific make files.
  
@@ -56,7 +55,7 @@
  
  
  #------------------------------------------------------------------------------
-@@ -403,18 +406,18 @@
+@@ -509,18 +509,18 @@
  # and the MIME ACL. Please read the documentation to learn more about these
  # features.
  
@@ -82,9 +81,9 @@
  # DISABLE_MAL_SOCK=yes
  # DISABLE_MAL_CMDLINE=yes
  
-@@ -517,6 +520,10 @@
- # Ref: https://datatracker.ietf.org/doc/draft-fenton-smtp-require-tls
- # EXPERIMENTAL_REQUIRETLS=yes
+@@ -635,6 +638,10 @@
+ # Uncomment the following to include the fast-ramp two-phase-queue-run support
+ # EXPERIMENTAL_QUEUE_RAMP=yes
  
 +# Uncomment the following line to add Redis support
 +# CFLAGS += -I/usr/local/include
@@ -93,7 +92,7 @@
  ###############################################################################
  #                 THESE ARE THINGS YOU MIGHT WANT TO SPECIFY                  #
  ###############################################################################
-@@ -645,16 +652,16 @@
+@@ -763,8 +770,8 @@
  # configuration to make use of the mechanism(s) selected.
  
  AUTH_CRAM_MD5=yes
@@ -101,9 +100,10 @@
 -# AUTH_DOVECOT=yes
 +AUTH_CYRUS_SASL=yes
 +AUTH_DOVECOT=yes
+ # AUTH_EXTERNAL=yes
  # AUTH_GSASL=yes
  # AUTH_GSASL_PC=libgsasl
- # AUTH_HEIMDAL_GSSAPI=yes
+@@ -772,8 +779,8 @@
  # AUTH_HEIMDAL_GSSAPI_PC=heimdal-gssapi
  # AUTH_HEIMDAL_GSSAPI_PC=heimdal-gssapi heimdal-krb5
  AUTH_PLAINTEXT=yes
@@ -114,7 +114,7 @@
  
  # Heimdal through 1.5 required pkg-config 'heimdal-gssapi'; Heimdal 7.1
  # requires multiple pkg-config files to work with Exim, so the second example
-@@ -667,7 +674,7 @@
+@@ -786,7 +793,7 @@
  # Similarly for GNU SASL, unless pkg-config is used via AUTH_GSASL_PC.
  # Ditto for AUTH_HEIMDAL_GSSAPI(_PC).
  
@@ -123,7 +123,7 @@
  # AUTH_LIBS=-lgsasl
  # AUTH_LIBS=-lgssapi -lheimntlm -lkrb5 -lhx509 -lcom_err -lhcrypto -lasn1 -lwind -lroken -lcrypt
  
-@@ -707,6 +714,7 @@
+@@ -829,6 +836,7 @@
  #
  # HAVE_ICONV=yes
  # CFLAGS=-O -I/usr/local/include
@@ -131,7 +131,7 @@
  # EXTRALIBS_EXIM=-L/usr/local/lib -liconv
  #
  # but of course there may need to be other things in CFLAGS and EXTRALIBS_EXIM
-@@ -949,11 +957,11 @@
+@@ -1017,11 +1025,11 @@
  # support, which is intended for use in conjunction with the SMTP AUTH
  # facilities, is included only when requested by the following setting:
  
@@ -145,7 +145,7 @@
  
  
  #------------------------------------------------------------------------------
-@@ -967,7 +975,7 @@
+@@ -1035,7 +1043,7 @@
  # If you may want to use inbound (server-side) proxying, using Proxy Protocol,
  # uncomment the line below.
  
@@ -154,7 +154,7 @@
  
  
  #------------------------------------------------------------------------------
-@@ -991,9 +999,9 @@
+@@ -1059,9 +1067,9 @@
  # installed on your system (www.libspf2.org). Depending on where it is installed
  # you may have to edit the CFLAGS and LDFLAGS lines.
  
@@ -166,7 +166,7 @@
  
  
  #------------------------------------------------------------------------------
-@@ -1322,7 +1330,7 @@
+@@ -1390,7 +1398,7 @@
  # local part) can be increased by changing this value. It should be set to
  # a multiple of 16.
  

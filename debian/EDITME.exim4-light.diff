@@ -1,6 +1,6 @@
---- EDITME.ORIG	2019-06-11 13:12:45.396155645 +0300
-+++ EDITME	2019-06-11 13:16:03.818473260 +0300
-@@ -98,7 +98,7 @@
+--- EDITME.ORIG 2020-05-30 20:35:38.000000000 +0000
++++ EDITME      2020-08-12 14:56:33.739439295 +0000
+@@ -99,7 +99,7 @@
  # /usr/local/sbin. The installation script will try to create this directory,
  # and any superior directories, if they do not exist.
  
@@ -9,7 +9,7 @@
  
  
  #------------------------------------------------------------------------------
-@@ -114,7 +114,7 @@
+@@ -115,7 +115,7 @@
  # don't exist. It will also install a default runtime configuration if this
  # file does not exist.
  
@@ -18,7 +18,7 @@
  
  # It is possible to specify a colon-separated list of files for CONFIGURE_FILE.
  # In this case, Exim will use the first of them that exists when it is run.
-@@ -131,7 +131,7 @@
+@@ -132,7 +132,7 @@
  # deliveries. (Local deliveries run as various non-root users, typically as the
  # owner of a local mailbox.) Specifying these values as root is not supported.
  
@@ -27,7 +27,7 @@
  
  # If you specify EXIM_USER as a name, this is looked up at build time, and the
  # uid number is built into the binary. However, you can specify that this
-@@ -153,6 +153,7 @@
+@@ -154,6 +154,7 @@
  # you want to use a group other than the default group for the given user.
  
  # EXIM_GROUP=
@@ -35,7 +35,7 @@
  
  # Many sites define a user called "exim", with an appropriate default group,
  # and use
-@@ -173,7 +174,7 @@
+@@ -174,7 +175,7 @@
  
  # Almost all installations choose this:
  
@@ -44,7 +44,23 @@
  
  
  
-@@ -237,7 +238,7 @@
+@@ -218,13 +219,13 @@
+ # TLS_LIBS=-L/usr/local/openssl/lib -lssl -lcrypto
+ 
+ # Uncomment this if you are using GnuTLS
+-# USE_GNUTLS=yes
++USE_GNUTLS=yes
+ # Uncomment one of these settings if you are using GnuTLS; pkg-config vs not
+ # and an optional location. If you disable SUPPORT_DANE below, you
+ # can remove the gnutls-dane references here.  Earlier versions of GnuTLS
+ # required libtasn1 and libgrypt also; add if needed.
+ # USE_GNUTLS_PC=gnutls gnutls-dane
+-# TLS_LIBS=-lgnutls -lgnutls-dane
++TLS_LIBS=-lgnutls
+ # TLS_LIBS=-L/usr/local/gnu/lib -lgnutls -ltasn1 -lgcrypt -lgnutls-dane
+ 
+ # If using GnuTLS older than 2.10 and using pkg-config then note that Exim's
+@@ -337,7 +338,7 @@
  # This one is special-purpose, and commonly not required, so it is not
  # included by default.
  
@@ -53,7 +69,7 @@
  
  
  #------------------------------------------------------------------------------
-@@ -246,8 +247,8 @@
+@@ -346,8 +347,8 @@
  # MBX, is included only when requested. If you do not know what this is about,
  # leave these settings commented out.
  
@@ -64,7 +80,7 @@
  # SUPPORT_MBX=yes
  
  
-@@ -306,16 +307,16 @@
+@@ -406,17 +407,17 @@
  LOOKUP_LSEARCH=yes
  LOOKUP_DNSDB=yes
  
@@ -73,6 +89,7 @@
 +LOOKUP_CDB=yes
 +LOOKUP_DSEARCH=yes
  # LOOKUP_IBASE=yes
+ # LOOKUP_JSON=yes
  # LOOKUP_LDAP=yes
  # LOOKUP_MYSQL=yes
  # LOOKUP_MYSQL_PC=mariadb
@@ -85,7 +102,25 @@
  # LOOKUP_PGSQL=yes
  # LOOKUP_REDIS=yes
  # LOOKUP_SQLITE=yes
-@@ -595,7 +596,7 @@
+@@ -433,7 +434,7 @@
+ 
+ 
+ # Some platforms may need this for LOOKUP_NIS:
+-# LIBS += -lnsl
++LIBS += -lnsl
+ 
+ #------------------------------------------------------------------------------
+ # If you have set LOOKUP_LDAP=yes, you should set LDAP_LIB_TYPE to indicate
+@@ -499,7 +500,7 @@
+ # files are defaulted in the OS/Makefile-Default file, but can be overridden in
+ # local OS-specific make files.
+ 
+-# EXIM_MONITOR=eximon.bin
++EXIM_MONITOR=eximon.bin
+ 
+ 
+ #------------------------------------------------------------------------------
+@@ -713,7 +714,7 @@
  # CONFIGURE_OWNER setting, to specify a configuration file which is listed in
  # the TRUSTED_CONFIG_LIST file, then root privileges are not dropped by Exim.
  
@@ -94,7 +129,7 @@
  
  
  #------------------------------------------------------------------------------
-@@ -631,6 +632,9 @@
+@@ -749,6 +750,9 @@
  
  # WHITELIST_D_MACROS=TLS:SPOOL
  
@@ -104,7 +139,7 @@
  #------------------------------------------------------------------------------
  # Exim has support for the AUTH (authentication) extension of the SMTP
  # protocol, as defined by RFC 2554. If you don't know what SMTP authentication
-@@ -640,7 +644,7 @@
+@@ -758,7 +762,7 @@
  # included in the Exim binary. You will then need to set up the run time
  # configuration to make use of the mechanism(s) selected.
  
@@ -112,8 +147,8 @@
 +AUTH_CRAM_MD5=yes
  # AUTH_CYRUS_SASL=yes
  # AUTH_DOVECOT=yes
- # AUTH_GSASL=yes
-@@ -648,7 +652,7 @@
+ # AUTH_EXTERNAL=yes
+@@ -767,7 +771,7 @@
  # AUTH_HEIMDAL_GSSAPI=yes
  # AUTH_HEIMDAL_GSSAPI_PC=heimdal-gssapi
  # AUTH_HEIMDAL_GSSAPI_PC=heimdal-gssapi heimdal-krb5
@@ -122,7 +157,7 @@
  # AUTH_SPA=yes
  # AUTH_TLS=yes
  
-@@ -674,7 +678,7 @@
+@@ -796,7 +800,7 @@
  # one that is set in the headers_charset option. The default setting is
  # defined by this setting:
  
@@ -131,28 +166,7 @@
  
  # If you are going to make use of $header_xxx expansions in your configuration
  # file, or if your users are going to use them in filter files, and the normal
-@@ -763,7 +767,7 @@
- # leave these settings commented out.
- 
- # This setting is required for any TLS support (either OpenSSL or GnuTLS)
--# SUPPORT_TLS=yes
-+SUPPORT_TLS=yes
- 
- # Uncomment one of these settings if you are using OpenSSL; pkg-config vs not
- # USE_OPENSSL_PC=openssl
-@@ -771,9 +775,9 @@
- 
- # Uncomment the first and either the second or the third of these if you
- # are using GnuTLS.  If you have pkg-config, then the second, else the third.
--# USE_GNUTLS=yes
-+USE_GNUTLS=yes
- # USE_GNUTLS_PC=gnutls
--# TLS_LIBS=-lgnutls -ltasn1 -lgcrypt
-+TLS_LIBS=-lgnutls
- 
- # If using GnuTLS older than 2.10 and using pkg-config then note that Exim's
- # build process will require libgcrypt-config to exist in your $PATH.  A
-@@ -853,6 +857,7 @@
+@@ -906,6 +910,7 @@
  # to form the final file names. Some installations may want something like this:
  
  # LOG_FILE_PATH=/var/log/exim_%slog
@@ -160,7 +174,7 @@
  
  # which results in files with names /var/log/exim_mainlog, etc. The directory
  # in which the log files are placed must exist; Exim does not try to create
-@@ -901,7 +906,7 @@
+@@ -954,7 +959,7 @@
  # files. Both the name of the command and the suffix that it adds to files
  # need to be defined here. See also the EXICYCLOG_MAX configuration.
  
@@ -169,7 +183,7 @@
  COMPRESS_SUFFIX=gz
  
  
-@@ -916,7 +921,7 @@
+@@ -969,7 +974,7 @@
  # ZCAT_COMMAND=zcat
  #
  # Or specify the full pathname:
@@ -178,7 +192,7 @@
  
  #------------------------------------------------------------------------------
  # Compiling in support for embedded Perl: If you want to be able to
-@@ -948,6 +953,7 @@
+@@ -1001,6 +1006,7 @@
  
  # You probably need to add -lpam to EXTRALIBS, and in some releases of
  # GNU/Linux -ldl is also needed.
@@ -186,7 +200,7 @@
  
  
  #------------------------------------------------------------------------------
-@@ -956,7 +962,7 @@
+@@ -1009,7 +1015,7 @@
  # If you may want to use outbound (client-side) proxying, using Socks5,
  # uncomment the line below.
  
@@ -195,7 +209,7 @@
  
  # If you may want to use inbound (server-side) proxying, using Proxy Protocol,
  # uncomment the line below.
-@@ -1054,6 +1060,8 @@
+@@ -1107,6 +1113,8 @@
  
  # CYRUS_SASLAUTHD_SOCKET=/var/state/saslauthd/mux
  
@@ -204,7 +218,7 @@
  
  #------------------------------------------------------------------------------
  # TCP wrappers: If you want to use tcpwrappers from within Exim, uncomment
-@@ -1136,7 +1144,7 @@
+@@ -1189,7 +1197,7 @@
  #------------------------------------------------------------------------------
  # Uncomment this setting to include IPv6 support.
  
@@ -213,7 +227,7 @@
  
  ###############################################################################
  #              THINGS YOU ALMOST NEVER NEED TO MENTION                        #
-@@ -1366,6 +1374,7 @@
+@@ -1419,6 +1427,7 @@
  # file can be specified here. Some installations may want something like this:
  
  # PID_FILE_PATH=/var/lock/exim.pid
@@ -221,7 +235,7 @@
  
  # If PID_FILE_PATH is not defined, Exim writes a file in its spool directory
  # using the name "exim-daemon.pid".
-@@ -1399,6 +1408,7 @@
+@@ -1452,6 +1461,7 @@
  # messages become "invisible" to the normal management tools.
  
  # SUPPORT_MOVE_FROZEN_MESSAGES=yes
