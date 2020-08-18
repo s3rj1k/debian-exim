@@ -1,19 +1,28 @@
---- EDITME.ORIG	2019-06-11 13:16:46.742965280 +0300
-+++ EDITME	2019-06-11 13:35:13.955120973 +0300
-@@ -771,13 +771,13 @@
+--- EDITME.ORIG 2020-05-30 20:35:38.000000000 +0000
++++ EDITME      2020-08-12 14:56:33.739439295 +0000
+@@ -212,21 +212,21 @@ SPOOL_DIRECTORY=/var/spool/exim4
+ # If you are buliding with TLS, the library configuration must be done:
  
+ # Uncomment this if you are using OpenSSL
+-# USE_OPENSSL=yes
++USE_OPENSSL=yes
  # Uncomment one of these settings if you are using OpenSSL; pkg-config vs not
+ # and an optional location.
  # USE_OPENSSL_PC=openssl
 -# TLS_LIBS=-lssl -lcrypto
 +TLS_LIBS=-lssl -lcrypto
+ # TLS_LIBS=-L/usr/local/openssl/lib -lssl -lcrypto
  
- # Uncomment the first and either the second or the third of these if you
- # are using GnuTLS.  If you have pkg-config, then the second, else the third.
+ # Uncomment this if you are using GnuTLS
 -USE_GNUTLS=yes
 +# USE_GNUTLS=yes
- # USE_GNUTLS_PC=gnutls
+ # Uncomment one of these settings if you are using GnuTLS; pkg-config vs not
+ # and an optional location. If you disable SUPPORT_DANE below, you
+ # can remove the gnutls-dane references here.  Earlier versions of GnuTLS
+ # required libtasn1 and libgrypt also; add if needed.
+ # USE_GNUTLS_PC=gnutls gnutls-dane
 -TLS_LIBS=-lgnutls
 +# TLS_LIBS=-lgnutls
+ # TLS_LIBS=-L/usr/local/gnu/lib -lgnutls -ltasn1 -lgcrypt -lgnutls-dane
  
  # If using GnuTLS older than 2.10 and using pkg-config then note that Exim's
- # build process will require libgcrypt-config to exist in your $PATH.  A

@@ -1,3 +1,9 @@
+exim4 (4.94-99a) jessie; urgency=medium
+
+  * https://github.com/Exim/exim/blob/exim-4.94%2Bfixes/doc/doc-txt/ChangeLog
+
+ -- kaut <maksimkaut92@gmail.com>  Tue, 11 Aug 2020 18:00:00 +0200
+
 exim4 (4.92.3-99a) jessie; urgency=medium
 
   * https://github.com/Exim/exim/blob/exim-4.92.3%2Bfixes/doc/doc-txt/ChangeLog

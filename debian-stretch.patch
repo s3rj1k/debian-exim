@@ -1,8 +1,15 @@
 diff --git a/debian/NEWS b/debian/NEWS
-index 95fabc8..f43c7b4 100644
+index b305d35..a62ab4a 100644
 --- a/debian/NEWS
 +++ b/debian/NEWS
-@@ -1,16 +1,16 @@
+@@ -1,22 +1,22 @@
+-exim4 (4.94-99a) jessie; urgency=medium
++exim4 (4.94-99a) stretch; urgency=medium
+
+   * https://github.com/Exim/exim/blob/exim-4.94%2Bfixes/doc/doc-txt/ChangeLog
+
+  -- kaut <maksimkaut92@gmail.com>  Tue, 11 Aug 2020 18:00:00 +0200
+
 -exim4 (4.92.3-99a) jessie; urgency=medium
 +exim4 (4.92.3-99a) stretch; urgency=medium
 
@@ -23,10 +30,17 @@ index 95fabc8..f43c7b4 100644
    * https://github.com/Exim/exim/blob/exim-4.92.1%2Bfixes/doc/doc-txt/ChangeLog
 
 diff --git a/debian/changelog b/debian/changelog
-index 95fabc8..f43c7b4 100644
+index b305d35..a62ab4a 100644
 --- a/debian/changelog
 +++ b/debian/changelog
-@@ -1,16 +1,16 @@
+@@ -1,22 +1,22 @@
+-exim4 (4.94-99a) jessie; urgency=medium
++exim4 (4.94-99a) stretch; urgency=medium
+
+   * https://github.com/Exim/exim/blob/exim-4.94%2Bfixes/doc/doc-txt/ChangeLog
+
+  -- kaut <maksimkaut92@gmail.com>  Tue, 11 Aug 2020 18:00:00 +0200
+
 -exim4 (4.92.3-99a) jessie; urgency=medium
 +exim4 (4.92.3-99a) stretch; urgency=medium
 
@@ -45,4 +59,3 @@ index 95fabc8..f43c7b4 100644
 +exim4 (4.92.1-99a) stretch; urgency=medium
 
    * https://github.com/Exim/exim/blob/exim-4.92.1%2Bfixes/doc/doc-txt/ChangeLog
-
