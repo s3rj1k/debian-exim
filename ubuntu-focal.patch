@@ -30,10 +30,17 @@ index b305d35..3a83dd6 100644
    * https://github.com/Exim/exim/blob/exim-4.92.1%2Bfixes/doc/doc-txt/ChangeLog
  
 diff --git a/debian/changelog b/debian/changelog
-index b305d35..3a83dd6 100644
+index 5d6211d..acc62f4 100644
 --- a/debian/changelog
 +++ b/debian/changelog
-@@ -1,22 +1,22 @@
+@@ -1,28 +1,28 @@
+-exim4 (4.94-99b) jessie; urgency=medium
++exim4 (4.94-99b) focal; urgency=medium
+ 
+   * Rebuild
+ 
+  -- kaut <maksimkaut92@gmail.com>  Tue, 27 Aug 2020 12:00:00 +0200
+ 
 -exim4 (4.94-99a) jessie; urgency=medium
 +exim4 (4.94-99a) focal; urgency=medium
  

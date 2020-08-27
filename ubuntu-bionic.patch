@@ -5,11 +5,11 @@ index b305d35..94530b7 100644
 @@ -1,22 +1,22 @@
 -exim4 (4.94-99a) jessie; urgency=medium
 +exim4 (4.94-99a) bionic; urgency=medium
-
+ 
    * https://github.com/Exim/exim/blob/exim-4.94%2Bfixes/doc/doc-txt/ChangeLog
-
+ 
   -- kaut <maksimkaut92@gmail.com>  Tue, 11 Aug 2020 18:00:00 +0200
-
+ 
 -exim4 (4.92.3-99a) jessie; urgency=medium
 +exim4 (4.92.3-99a) bionic; urgency=medium
  
@@ -30,17 +30,24 @@ index b305d35..94530b7 100644
    * https://github.com/Exim/exim/blob/exim-4.92.1%2Bfixes/doc/doc-txt/ChangeLog
  
 diff --git a/debian/changelog b/debian/changelog
-index b305d35..94530b7 100644
+index 5d6211d..8fcb85c 100644
 --- a/debian/changelog
 +++ b/debian/changelog
-@@ -1,22 +1,22 @@
+@@ -1,28 +1,28 @@
+-exim4 (4.94-99b) jessie; urgency=medium
++exim4 (4.94-99b) bionic; urgency=medium
+ 
+   * Rebuild
+ 
+  -- kaut <maksimkaut92@gmail.com>  Tue, 27 Aug 2020 12:00:00 +0200
+ 
 -exim4 (4.94-99a) jessie; urgency=medium
 +exim4 (4.94-99a) bionic; urgency=medium
-
+ 
    * https://github.com/Exim/exim/blob/exim-4.94%2Bfixes/doc/doc-txt/ChangeLog
-
+ 
   -- kaut <maksimkaut92@gmail.com>  Tue, 11 Aug 2020 18:00:00 +0200
-
+ 
 -exim4 (4.92.3-99a) jessie; urgency=medium
 +exim4 (4.92.3-99a) bionic; urgency=medium
  
@@ -59,3 +66,4 @@ index b305d35..94530b7 100644
 +exim4 (4.92.1-99a) bionic; urgency=medium
  
    * https://github.com/Exim/exim/blob/exim-4.92.1%2Bfixes/doc/doc-txt/ChangeLog
+ 
