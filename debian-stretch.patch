@@ -5,57 +5,65 @@ index b305d35..a62ab4a 100644
 @@ -1,22 +1,22 @@
 -exim4 (4.94-99a) jessie; urgency=medium
 +exim4 (4.94-99a) stretch; urgency=medium
-
+ 
    * https://github.com/Exim/exim/blob/exim-4.94%2Bfixes/doc/doc-txt/ChangeLog
-
+ 
   -- kaut <maksimkaut92@gmail.com>  Tue, 11 Aug 2020 18:00:00 +0200
-
+ 
 -exim4 (4.92.3-99a) jessie; urgency=medium
 +exim4 (4.92.3-99a) stretch; urgency=medium
-
+ 
    * https://github.com/Exim/exim/blob/exim-4.92.3%2Bfixes/doc/doc-txt/ChangeLog
-
+ 
   -- s3rj1k <evasive.gyron@gmail.com>  Mon, 30 Sep 2019 09:00:00 +0200
-
+ 
 -exim4 (4.92.2-99a) jessie; urgency=medium
 +exim4 (4.92.2-99a) stretch; urgency=medium
-
+ 
    * https://github.com/Exim/exim/blob/exim-4.92.2%2Bfixes/doc/doc-txt/ChangeLog
-
+ 
   -- kaut <maksimkaut92@gmail.com>  Mon, 9 Aug 2019 12:00:00 +0100
-
+ 
 -exim4 (4.92.1-99a) jessie; urgency=medium
 +exim4 (4.92.1-99a) stretch; urgency=medium
-
+ 
    * https://github.com/Exim/exim/blob/exim-4.92.1%2Bfixes/doc/doc-txt/ChangeLog
-
+ 
 diff --git a/debian/changelog b/debian/changelog
-index b305d35..a62ab4a 100644
+index 5d6211d..26a1876 100644
 --- a/debian/changelog
 +++ b/debian/changelog
-@@ -1,22 +1,22 @@
+@@ -1,28 +1,28 @@
+-exim4 (4.94-99b) jessie; urgency=medium
++exim4 (4.94-99b) stretch; urgency=medium
+ 
+   * Rebuild
+ 
+  -- kaut <maksimkaut92@gmail.com>  Tue, 27 Aug 2020 12:00:00 +0200
+ 
 -exim4 (4.94-99a) jessie; urgency=medium
 +exim4 (4.94-99a) stretch; urgency=medium
-
+ 
    * https://github.com/Exim/exim/blob/exim-4.94%2Bfixes/doc/doc-txt/ChangeLog
-
+ 
   -- kaut <maksimkaut92@gmail.com>  Tue, 11 Aug 2020 18:00:00 +0200
-
+ 
 -exim4 (4.92.3-99a) jessie; urgency=medium
 +exim4 (4.92.3-99a) stretch; urgency=medium
-
+ 
    * https://github.com/Exim/exim/blob/exim-4.92.3%2Bfixes/doc/doc-txt/ChangeLog
-
+ 
   -- s3rj1k <evasive.gyron@gmail.com>  Mon, 30 Sep 2019 09:00:00 +0200
-
+ 
 -exim4 (4.92.2-99a) jessie; urgency=medium
 +exim4 (4.92.2-99a) stretch; urgency=medium
-
+ 
    * https://github.com/Exim/exim/blob/exim-4.92.2%2Bfixes/doc/doc-txt/ChangeLog
-
+ 
   -- kaut <maksimkaut92@gmail.com>  Mon, 9 Aug 2019 12:00:00 +0100
-
+ 
 -exim4 (4.92.1-99a) jessie; urgency=medium
 +exim4 (4.92.1-99a) stretch; urgency=medium
-
+ 
    * https://github.com/Exim/exim/blob/exim-4.92.1%2Bfixes/doc/doc-txt/ChangeLog
+ 
